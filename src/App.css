@@ -8,36 +8,57 @@
 	text-align: center;
 }
 
-.food-container {
+.week-menu-container {
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	justify-content: center;
 }
 
-.food-item {
-	margin-left: 3px;
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-auto-flow: column;
-}
-
-.delete-food {
-	margin: 3px 0;
-}
-.single-day-food {
-	width: 300px;
-	margin-bottom: 50px;
-	display: grid;
-	grid-template-columns: 1fr;
-	justify-content: flex-end;
-}
-
-.day {
+.menu-date {
 	text-align: center;
 }
 
 hr {
-	margin-top: 3px;
+	margin-top: 0;
+}
+
+.menu-type-container {
+	display: grid;
+	grid-template-columns: 1fr 50px;
+	margin-bottom: 30px;
+	align-items: baseline;
+}
+
+.menu-container {
+	min-width: 300px;
+	max-width: 300px;
+	padding: 10px 20px;
+	margin-bottom: 15px !important;
+}
+
+.menu-header {
+	grid-column: 1/-1;
+}
+
+.food-list .food-item {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-auto-flow: column;
+	align-items: center;
+}
+
+.delete-food, .add-food {
+	float: right;
+}
+
+.add-food {
+	text-align: center;
+	margin-left: 5px;
+}
+
+.food-item {
 	margin-bottom: 10px;
 }
+
+
 

@@ -1,4 +1,5 @@
 import React from "react"
+import { dayToString, zeroPad } from "../utils/helpers.js"
 
 function Header(props) {
 	let {day, date, month, year} = props.date;
@@ -10,19 +11,5 @@ function Header(props) {
 		)
 }
 
-function dayToString(day) {
-	// gets an integer (day) and return the string representation of the day
-	const day_array = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-	return day_array[day];
-}
-
-function zeroPad(number){
-	// if number is single digit, add a zero infront
-	if (number < 10) {
-		return "0"+ number.toString()
-	} else {
-		return number
-	}
-}
 
 export default Header;
