@@ -1,5 +1,5 @@
 import React from "react"
-
+import Button from "react-bootstrap/Button"
 
 class FoodItem extends React.Component {
 	deleteFood = (e) => {
@@ -10,7 +10,7 @@ class FoodItem extends React.Component {
 		return (
 				<React.Fragment>
 					<p className="food-item">{this.props.food}</p>
-					<button className="btn" onClick={this.deleteFood}> &#x274C; </button>
+					<Button variant="link" className="delete-food" onClick={this.deleteFood}> &#x00D7; </Button>
 				</React.Fragment>
 			)
 	}

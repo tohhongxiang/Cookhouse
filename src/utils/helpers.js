@@ -10,26 +10,41 @@ export function zeroPad(number){
 	return number < 10 ? "0"+ number.toString() : number;
 }
 
-export function getPreviousMonday()
+export function getNearestMonday()
 {
-    let date = new Date();
-    let day = date.getDay();
-    let prevMonday;
-    if(date.getDay() === 0){
-        prevMonday = new Date().setDate(date.getDate() - 7);
+    var date = new Date();
+    var day = date.getDay();
+    var monday;
+    if(date.getDay() === 1){
+        monday = new Date().setDate(date.getDate());
     }
     else{
-        prevMonday = new Date().setDate(date.getDate() - day);
+        monday = new Date().setDate(date.getDate() - day + 1);
     }
 
-    return prevMonday;
+    return new Date(new Date(monday).setHours(0,0,0,0));
+}
+
+export function getCurrentWeek() {
+	let startDate = getNearestMonday();
+	let endDate = new Date(startDate);
+	endDate.setDate(endDate.getDate() + 4);
+
+	return {startDate, endDate};
 }
 
 export function displayDate(date_in) { // accepts a date object, turns it into string representation
-	let day = dayToString(date_in.getDay());
 	let date = zeroPad(date_in.getDate());
 	let month = zeroPad(date_in.getMonth() + 1); 
 	let year = zeroPad(date_in.getFullYear());
 
-	return `${day} \n ${date}/${month}/${year}`;
+	return `${date}/${month}/${year}`;
+}
+
+export function displayDay(date_in) {
+	return dayToString(date_in.getDay());
+}
+
+export function getTodayDate() {
+	return new Date(new Date().setHours(0,0,0,0));
 }

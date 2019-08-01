@@ -1,5 +1,7 @@
 import React from "react"
 import FoodItem from "./FoodItem"
+import Button from "react-bootstrap/Button"
+import Form from "react-bootstrap/Form"
 import uuid from "uuid"
 
 class Menu extends React.Component{
@@ -34,6 +36,10 @@ class Menu extends React.Component{
 		}
 	}
 
+	deleteMenu = (e) => {
+		this.props.deleteMenu(this.props.menuType);
+	}
+
 	
 
 	render() {
@@ -44,10 +50,13 @@ class Menu extends React.Component{
 
 		return (
 				<div className="menu-type-container">
-						<h5 className="menu-header">{menuType}</h5> 
+					<div className="menu-type-header">
+						<h5 className="menu-header"> {menuType} </h5> 
+						<Button variant="link" className="delete-menu" onClick={this.deleteMenu}> &#x274C; </Button>
+					</div>
 						{foodList}
-						<input type="text" className="form-control" onChange={this.handleChange} value={this.state.food} onKeyDown={this.handleKeyDown}/>
-						<button type="submit" className="btn btn-outline-secondary add-food" onClick={this.handleSubmit}><strong> + </strong></button>
+						<Form.Control type="text" onChange={this.handleChange} value={this.state.food} onKeyDown={this.handleKeyDown}/>
+						<Button type="submit" variant="outline-secondary" className="add-food" onClick={this.handleSubmit}><strong> + </strong></Button>
 				</div>
 			)
 			

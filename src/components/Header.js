@@ -1,22 +1,16 @@
 import React from "react"
 import DatePicker from  "react-datepicker";
+import Form from "react-bootstrap/Form"
 import "react-datepicker/dist/react-datepicker.css";
-import { displayDate } from "../utils/helpers.js";
 
 class Header extends React.Component {
-	constructor(props){
-		super(props);
-	}
-
 	changeStartDate = (date) => {
-		let date_ = date.setHours(0,0,0,0);
-		this.props.changeStartDate(date_);
+		this.props.changeStartDate(date.setHours(0,0,0,0));
 		
 	}
 
 	changeEndDate = (date) => {
-		let date_ = date.setHours(0,0,0,0);
-		this.props.changeEndDate(date_);
+		this.props.changeEndDate(date.setHours(0,0,0,0));
 		
 	}
 
@@ -24,16 +18,20 @@ class Header extends React.Component {
 		return (
 		<div className="header">
 			<h1> Welcome to the cookhouse </h1>
-			<div className="date-pickers">
-				<span>
+			<Form className="date-pickers">
+				<Form.Label className="datePickerLabel">
+				Start: 
+				</Form.Label>
 					<DatePicker 
 					className="startDatePicker"
 					selectsStart 
 					dateFormat="dd/MM/yyyy" 
 					selected={this.props.startDate} 
 					onChange={this.changeStartDate}/>
-				</span> - 
-				<span>
+				   
+				<Form.Label className="datePickerLabel">
+				End:
+				</Form.Label>
 					<DatePicker 
 					className="endDatePicker"
 					selectsEnd 
@@ -41,8 +39,8 @@ class Header extends React.Component {
 					selected={this.props.endDate} 
 					onChange={this.changeEndDate}
 					minDate={this.props.startDate}/>
-				</span>
-			</div>
+				
+			</Form>
 		</div>
 		)
 	}
