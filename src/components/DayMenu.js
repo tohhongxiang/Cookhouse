@@ -20,7 +20,6 @@ class DayMenu extends React.Component {
 			deleteFood={this.deleteFood} 
 			addFood={this.addFood}/>
 			);
-		console.log(menuOfTheDay.date);
 
 	return (
 		<div className="menu-container card">

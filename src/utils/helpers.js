@@ -31,5 +31,5 @@ export function displayDate(date_in) { // accepts a date object, turns it into s
 	let month = zeroPad(date_in.getMonth() + 1); 
 	let year = zeroPad(date_in.getFullYear());
 
-	return `${day} ${date}/${month}/${year}`;
+	return `${day} \n ${date}/${month}/${year}`;
 }

@@ -44,10 +44,10 @@ class Menu extends React.Component{
 
 		return (
 				<div className="menu-type-container">
-						<h3 className="menu-header">{menuType}</h3> 
+						<h5 className="menu-header">{menuType}</h5> 
 						{foodList}
 						<input type="text" className="form-control" onChange={this.handleChange} value={this.state.food} onKeyDown={this.handleKeyDown}/>
-						<button type="submit" className="btn btn-outline-secondary add-food" onClick={this.handleSubmit}> + </button>
+						<button type="submit" className="btn btn-outline-secondary add-food" onClick={this.handleSubmit}><strong> + </strong></button>
 				</div>
 			)
 			

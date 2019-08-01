@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+.header {
+	padding: 20px 0;
+	text-align:center;
+}
+
 .header > * {
 	text-align: center;
 }
@@ -11,6 +16,7 @@
 .week-menu-container {
 	display: flex;
 	justify-content: center;
+	margin: 0 auto;
 }
 
 .menu-date {
@@ -25,6 +31,7 @@ hr {
 	display: grid;
 	grid-template-columns: 1fr 50px;
 	margin-bottom: 30px;
+	padding: 15px 10px;
 	align-items: baseline;
 }
 
@@ -37,6 +44,7 @@ hr {
 
 .menu-header {
 	grid-column: 1/-1;
+	text-transform: uppercase;
 }
 
 .food-list .food-item {
