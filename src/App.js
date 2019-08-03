@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import DayMenu from './components/DayMenu'
 import Header from "./components/Header"
+import Footer from "./components/Footer"
 import uuid from "uuid"
 import Jumbotron from "react-bootstrap/Jumbotron"
 import {getCurrentWeek} from "./utils/helpers"
@@ -14,30 +15,126 @@ class App extends React.Component {
       startDate: startDate,
       endDate: endDate,
       overallMenu: 
-      [{"date": new Date(2019,8,1), 
+      [{"date": new Date(2019,7,1), 
       "id": uuid.v4(), 
       "menu": [
-      {"menuType": "Muslim", 
-      "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, 
-      {"menuType": "Non-muslim", 
-      "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, 
-      {"menuType": "Vegetarian", 
-      "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, 
-      {"date": new Date(2019,8,2), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8,3), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8,4), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8,5), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8,6), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8,7), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8,8), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8,9), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 10), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 11), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 12), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 13), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 14), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 15), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 16), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 17), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 18), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 19), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 20), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 21), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 22), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 23), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 24), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 25), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 26), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 27), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 28), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 29), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 30), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,8, 31), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9,1), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9,2), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9,3), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9,4), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9,5), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9,6), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9,7), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9,8), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9,9), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 10), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 11), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 12), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 13), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 14), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 15), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 16), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 17), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 18), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 19), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 20), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 21), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 22), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 23), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 24), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 25), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 26), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 27), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 28), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 29), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019,9, 30), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10,1), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10,2), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10,3), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10,4), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10,5), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10,6), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10,7), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10,8), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10,9), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 10), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 11), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 12), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 13), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 14), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 15), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 16), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 17), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 18), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 19), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 20), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 21), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 22), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 23), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 24), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 25), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 26), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 27), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 28), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 29), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 30), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 10, 31), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 11,1), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 11,2), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 11,3), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 11,4), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 11,5), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 11,6), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 11,7), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}, {"date": new Date(2019, 11,8), "id": uuid.v4(), "menu": [{"menuType": "Muslim", "foodList": ["Muslim food 1", "Muslim food 2", "Muslim food 3"]}, {"menuType": "Non-muslim", "foodList": ["Non-muslim food 1", "Non-muslim food 2", "Non-muslim food 3"]}, {"menuType": "Vegetarian", "foodList": ["Vegetarian food 1", "Vegetarian food 2", "Vegetarian food 3"]}]}]
+      {
+        "mealType": "Breakfast",
+        "menuList": [
+          {
+            "subMenuType":"Muslim",
+            "menuList": [
+              "Muslim food 1 Breakfast",
+              "Muslim food 2 Breakfast",
+              "Muslim food 3 Breakfast"
+            ]
+          },
+          {
+            "subMenuType":"Non-Muslim",
+            "menuList": [
+              "Non-Muslim food 1 Breakfast",
+              "Non-Muslim food 2 Breakfast",
+              "Non-Muslim food 3 Breakfast"
+            ]
+          },
+          {
+            "subMenuType":"Vegetarian",
+            "menuList": [
+              "Vegetarian food 1 Breakfast",
+              "Vegetarian food 2 Breakfast",
+              "Vegetarian food 3 Breakfast"
+            ]
+          },
+        ]
+      },
+      {
+        "mealType": "Lunch",
+        "menuList": [
+          {
+            "subMenuType":"Muslim",
+            "menuList": [
+              "Muslim food 1 Lunch",
+              "Muslim food 2 Lunch",
+              "Muslim food 3 Lunch"
+            ]
+          },
+          {
+            "subMenuType":"Non-Muslim",
+            "menuList": [
+              "Non-Muslim food 1 Lunch",
+              "Non-Muslim food 2 Lunch",
+              "Non-Muslim food 3 Lunch"
+            ]
+          },
+          {
+            "subMenuType":"Vegetarian",
+            "menuList": [
+              "Vegetarian food 1 Lunch",
+              "Vegetarian food 2 Lunch",
+              "Vegetarian food 3 Lunch"
+            ]
+          },
+        ]
+      },
+      {
+        "mealType": "Dinner",
+        "menuList": [
+          {
+            "subMenuType":"Muslim",
+            "menuList": [
+              "Muslim food 1 Dinner",
+              "Muslim food 2 Dinner",
+              "Muslim food 3 Dinner"
+            ]
+          },
+          {
+            "subMenuType":"Non-Muslim",
+            "menuList": [
+              "Non-Muslim food 1 Dinner",
+              "Non-Muslim food 2 Dinner",
+              "Non-Muslim food 3 Dinner"
+            ]
+          },
+          {
+            "subMenuType":"Vegetarian",
+            "menuList": [
+              "Vegetarian food 1 Dinner",
+              "Vegetarian food 2 Dinner",
+              "Vegetarian food 3 Dinner"
+            ]
+          },
+        ]
+      }] 
+      }, 
+      {"date": new Date(2019,7,2), 
+      "id": uuid.v4(), 
+      "menu": [
+      {
+        "mealType": "Breakfast",
+        "menuList": []
+      },
+      
+      ] 
+      }
+      ]
     }
   }
 
-  deleteFood = (food, menuType, date) => {
+  deleteFood = (food, menuType, mealType, date) => {
     let overallMenuCopy = [...this.state.overallMenu];
     overallMenuCopy.forEach(day => {
       if (day.date === date) {
-        day.menu.forEach(menu => {
-          if (menu.menuType === menuType) {
-            menu.foodList = menu.foodList.filter(item => {
-              return item !== food;
+        day.menu.forEach(meal => {
+          if (meal.mealType === mealType) {
+            meal.menuList.forEach( subMenu => {
+              if (subMenu.subMenuType === menuType) {
+                subMenu.menuList = subMenu.menuList.filter(item => {
+                  return item !== food
+                });
+              }
             });
           };
-          return menu;
+          return meal;
         });
       }
       return day;
@@ -48,16 +145,21 @@ class App extends React.Component {
     });
   };
 
-  addFood = (food, menuType, date) => {
+  addFood = (food, menuType, mealType, date) => {
     if (food) { // only add if not empty
+
       let overallMenuCopy = [...this.state.overallMenu];
       overallMenuCopy.forEach(day => {
         if (day.date === date) {
-          day.menu.forEach(menu => {
-            if (menu.menuType === menuType) {
-              menu.foodList.push(food);
+          day.menu.forEach(meal => {
+            if (meal.mealType === mealType) {
+              meal.menuList.forEach( subMenu => {
+                if (subMenu.subMenuType === menuType) {
+                  subMenu.menuList.push(food);
+                }
+              });
             };
-            return menu;
+            return meal;
           });
         }
         return day;
@@ -67,7 +169,6 @@ class App extends React.Component {
         overallMenu: overallMenuCopy
       });
     }
-    
   };
 
   changeStartDate = (time) => {
@@ -82,14 +183,70 @@ class App extends React.Component {
     });
   }
 
-  deleteMenu = (menuToDelete, date) => {
+  deleteMenu = (menuType, mealType, date) => {
     let overallMenuCopy = [...this.state.overallMenu];
-    overallMenuCopy.forEach(day => {
+      overallMenuCopy.forEach(day => {
         if (day.date === date) {
-          day.menu = day.menu.filter(menu => {
-            console.log(menu.menuType !== menuToDelete);
-            return menu.menuType !== menuToDelete;
+          day.menu.forEach(meal => {
+            if (meal.mealType === mealType) {
+              meal.menuList = meal.menuList.filter(subMenu => subMenu.subMenuType !== menuType);
+            };
+            return meal;
           });
+        }
+        return day;
+      });
+
+      this.setState({
+        overallMenu: overallMenuCopy
+      });
+  }
+
+  addMeal = (meal, date) => {
+    let found = false;
+    let overallMenuCopy = [...this.state.overallMenu];
+    overallMenuCopy.forEach(day => { // Append the menu to the day if it exists
+        if (day.date === date) {
+          found = true;
+          day.menu.push({
+            mealType: meal,
+            menuList: [],
+          });
+        }
+        return day
+      });
+
+    if (!found) {
+      overallMenuCopy.push({
+        date: date,
+        id: uuid.v4(),
+        menu: [{
+          mealType: meal,
+          menuList: []
+        }]
+      });
+    };
+
+    this.setState({
+      overallMenu: overallMenuCopy,
+    });
+  }
+
+ addMenu = (menuToAdd, mealType, date) => {
+  console.log(menuToAdd, mealType, date);
+  if (menuToAdd.length > 0){
+    let overallMenuCopy = [...this.state.overallMenu];
+    overallMenuCopy.forEach(day => { // Append the menu to the day if it exists
+        if (day.date === date) {
+          day.menu.forEach(menu => {
+            if (menu.mealType === mealType) {
+              menu.menuList.push({
+                "subMenuType": menuToAdd,
+                "menuList": []
+              });
+            }
+            return menu;
+          })
         }
         return day;
       });
@@ -98,39 +255,24 @@ class App extends React.Component {
       overallMenu: overallMenuCopy,
     });
   }
+    
+  }
 
-  addMenu = (menuToAdd, date) => {
-    console.log("adding menu");
-    let found = false;
+  deleteMeal = (mealType, date) => {
     let overallMenuCopy = [...this.state.overallMenu];
-    overallMenuCopy.forEach(day => { // Append the menu to the day if it exists
+      overallMenuCopy.forEach(day => {
         if (day.date === date) {
-          found = true;
-          day.menu.push({
-            menuType: menuToAdd,
-            foodList: [],
-          });
+          day.menu = day.menu.filter(item => item.mealType !== mealType);
         }
-        return day
+        return day;
       });
 
-    if (!found) { // IF THE MENU OF THE DAY DOESNT EXIST YET, CREATE IT
-      console.log("New");
-      overallMenuCopy.push(
-      {"date": new Date(date), 
-      "id": uuid.v4(), 
-      "menu": [
-          {
-            menuType: menuToAdd,
-            foodList: [],
-          }]
-    });
-    }
-
-    this.setState({
-      overallMenu: overallMenuCopy,
-    });
+      this.setState({
+        overallMenu: overallMenuCopy
+      });
   }
+
+
 
   render(){
     let { startDate, endDate, overallMenu } = this.state;
@@ -163,20 +305,24 @@ class App extends React.Component {
 
     displayedMenus = displayedMenus.map(day => (
       <DayMenu 
-      menuOfTheDay={day} 
+      date={day.date}
+      menuOfTheDay={day.menu} 
       key={day.id} 
       deleteFood={this.deleteFood} 
       addFood={this.addFood} 
       deleteMenu={this.deleteMenu}
-      addMenu={this.addMenu}/>
+      addMenu={this.addMenu}
+      addMeal={this.addMeal}
+      deleteMeal={this.deleteMeal}/>
     ));
 
     return (
       <React.Fragment>
         <Header startDate={this.state.startDate} endDate={this.state.endDate} changeStartDate={this.changeStartDate} changeEndDate={this.changeEndDate}/>
-        <Jumbotron className="week-menu-container card-deck">
+        <Jumbotron className="weekMenu-container">
           {displayedMenus}
         </Jumbotron>
+        <Footer />
       </React.Fragment>
       )
   }

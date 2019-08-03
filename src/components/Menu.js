@@ -27,7 +27,7 @@ class Menu extends React.Component{
 	};
 
 	deleteFood = (food) => { // deletes whatever entry corresponds to it
-		this.props.deleteFood(food, this.props.menuType)
+		this.props.deleteFood(food, this.props.menuType);
 	};
 
 	handleKeyDown = (e) => {
@@ -49,14 +49,16 @@ class Menu extends React.Component{
 		let menuType = this.props.menuType;
 
 		return (
-				<div className="menu-type-container">
-					<div className="menu-type-header">
-						<h5 className="menu-header"> {menuType} </h5> 
-						<Button variant="link" className="delete-menu" onClick={this.deleteMenu}> &#x274C; </Button>
+				<div className="menu-container">
+					<div className="menu-header">
+						<h5> {menuType} </h5> 
+						<Button variant="link" className="delete-menu" onClick={this.deleteMenu}><strong><span role="button"> &#x00D7; </span></strong></Button>
 					</div>
 						{foodList}
-						<Form.Control type="text" onChange={this.handleChange} value={this.state.food} onKeyDown={this.handleKeyDown}/>
-						<Button type="submit" variant="outline-secondary" className="add-food" onClick={this.handleSubmit}><strong> + </strong></Button>
+						<Form className="add-food form-group">
+							<Form.Control type="text" onChange={this.handleChange} value={this.state.food} onKeyDown={this.handleKeyDown} placeholder="Add Food"/>
+							<Button type="submit" variant="outline-secondary" className="add-food" onClick={this.handleSubmit}><strong> + </strong></Button>
+						</Form>
 				</div>
 			)
 			

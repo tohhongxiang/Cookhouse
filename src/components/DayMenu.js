@@ -1,6 +1,5 @@
 import React from 'react';
-import Menu from "./Menu";
-import Card from "react-bootstrap/Card"
+import SubMenu from "./SubMenu"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import { displayDate, displayDay, getTodayDate } from "../utils/helpers";
@@ -9,38 +8,25 @@ class DayMenu extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			addMenuValue: "",
+			mealValue: "",
 		};
-	}
-
-	deleteFood = (food, menuType) => {
-		this.props.deleteFood(food, menuType, this.props.menuOfTheDay.date);
-	};
-
-	addFood = (food, menuType) => {
-		this.props.addFood(food, menuType, this.props.menuOfTheDay.date);
-	};
-
-	deleteMenu = (menuType) => {
-		this.props.deleteMenu(menuType, this.props.menuOfTheDay.date);
 	}
 
 	handleChange = (e) => {
 		this.setState({
-			addMenuValue: e.target.value,
+			mealValue: e.target.value,
 		});
 	}
 
-	handleSubmit = (e) => { // passes the value of the text up all the way to main component, and resets state
-		if (this.state.addMenuValue.length > 0) {
-			this.props.addMenu(this.state.addMenuValue, this.props.menuOfTheDay.date);
-		}
-		
-		this.setState({
-			addMenuValue: ""
-		});
+	handleSubmit = (e) => {
+		if (this.state.mealValue.length > 0){
+			this.props.addMeal(this.state.mealValue, this.props.date);
+			this.setState({
+				mealValue: "",
+			});
+			}
 		e.preventDefault();
-	};
+	}
 
 	handleKeyDown = (e) => {
 		if (e.keyCode === 13) { // IF ENTER IS PRESSED, SUBMIT
@@ -48,40 +34,61 @@ class DayMenu extends React.Component {
 		}
 	}
 
-	render(){
-		let menuOfTheDay = this.props.menuOfTheDay; // each day has 1 container
-		let menus = menuOfTheDay.menu.map(menuType => 
-			<Menu foodList={menuType.foodList} 
-			menuType={menuType.menuType} 
-			key={menuType.menuType} 
-			deleteFood={this.deleteFood} 
-			addFood={this.addFood}
-			deleteMenu={this.deleteMenu}/>
-			);
+	deleteFood = (food, menuType, mealType) => {
+		this.props.deleteFood(food, menuType, mealType, this.props.date);
+	};
 
-		if (menus.length <= 0) {
-			menus = <p className="text-center empty-menu-message"> No menu set </p>;
+	addFood = (food, menuType, mealType) => {
+		this.props.addFood(food, menuType, mealType, this.props.date);
+	};
+
+	addMenu = (menu, mealType) => {
+		this.props.addMenu(menu, mealType, this.props.date);
+	}
+
+	deleteMenu = (menuType, mealType) => {
+		this.props.deleteMenu(menuType, mealType, this.props.date);
+	}
+
+	deleteMeal = (mealType) => {
+		this.props.deleteMeal(mealType, this.props.date);
+	}
+
+	render(){
+		let menusToDisplay = this.props.menuOfTheDay.map(menu => (
+			<SubMenu mealType={menu.mealType} menuList={menu.menuList} deleteFood={this.deleteFood} addFood={this.addFood} deleteMenu={this.deleteMenu} addMeal={this.addMeal} deleteMeal={this.deleteMeal} addMenu={this.addMenu}/>
+		));
+
+		if (menusToDisplay.length <= 0) {
+			menusToDisplay = (<h3 className="text-center"> No meal set </h3>);
 		}
 
-		let classNames = "menu-container ";
-		if (menuOfTheDay.date.getTime() === getTodayDate().getTime()) {
+		let classNames = "dayMenu-container ";
+		if (getTodayDate().getTime() === this.props.date.getTime()) {
 			classNames += "active";
 		}
-
-	return (
-		<Card className={classNames}>
-			<h2 className="menu-day">{displayDate(menuOfTheDay.date)}</h2>
-			<h2 className="menu-date">{displayDay(menuOfTheDay.date)}</h2>
-			<hr/>
-			{menus}
-			<hr/>
-			<div className="add-menu">
-				<Form.Control type="text" onChange={this.handleChange} value={this.state.addMenuValue} onKeyDown={this.handleKeyDown} placeholder="Add menu"/>
-				<Button variant="primary" onClick={this.handleSubmit}> + </Button>
+		
+		return (
+			<div className={classNames}> 
+				<div className="dayMenu-header text-center">
+					<h2>{displayDate(this.props.date)}</h2>
+					<h2>{displayDay(this.props.date)}</h2>
+					<Form className="add-meal form-group">
+						<Form.Control 
+						type="text" 
+						className="add-meal" 
+						placeholder="Add Meal" 
+						onChange={this.handleChange} 
+						value={this.state.mealValue} 
+						onKeyDown={this.handleKeyDown} />
+						<Button variant="primary" onClick={this.handleSubmit}>+</Button>
+					</Form>
+				</div>
+				<div className="meals-container">
+				{menusToDisplay} 
+				</div>
 			</div>
-			
-		</Card>
-	  )
+			)
 	}
 }
 
