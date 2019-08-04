@@ -41,6 +41,16 @@
 	width: 200px;
 }
 
+.startDatePicker-container, .endDatePicker-container {
+	display: inline-block;
+	margin: 0 30px;
+}
+
+.startDatePicker-container > *, .endDatePicker-container > * {
+	display: block;
+	text-align: left;
+}
+
 .datePickerLabel {
 	margin-left: 30px;
 	margin-right: 10px;
@@ -160,5 +170,4 @@ footer {
 		margin-right: 0;
 	}
 }
-
 

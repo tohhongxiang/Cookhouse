@@ -56,7 +56,7 @@ class SubMenu extends React.Component {
 			<div className="meal-container">
 				<div className="meal-container-header">
 					<h3> {this.props.mealType} </h3>
-					<Button variant="link" size="lg" onClick={this.deleteMeal}>&#x274C;</Button>
+					<Button variant="link" size="lg" onClick={this.deleteMeal} className="deleteMeal">&#x274C;</Button>
 				</div>
 				{menuList}
 				<Form className="add-menu-container form-group">
