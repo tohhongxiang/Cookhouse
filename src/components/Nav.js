@@ -10,9 +10,9 @@ export default function Nav_() {
 		  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 		  <Navbar.Collapse id="responsive-navbar-nav">
 		    <Nav className="ml-auto link-list">
-		      <Nav.Link><Link to="/">Home</Link></Nav.Link>
-		      <Nav.Link><Link to="/help">Help</Link></Nav.Link>
-		      <Nav.Link><Link to="/about">About</Link></Nav.Link>
+		      <Link to="/">Home</Link>
+		      <Link to="/help">Help</Link>
+		      <Link to="/about">About</Link>
 		    </Nav>
 		  </Navbar.Collapse>
 		</Navbar>
