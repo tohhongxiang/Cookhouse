@@ -40,8 +40,6 @@ class Menu extends React.Component{
 		this.props.deleteMenu(this.props.menuType);
 	}
 
-	
-
 	render() {
 		let foodList = this.props.foodList.map(food => 
 			<FoodItem food={food} key={uuid.v4()} deleteFood={this.deleteFood}/> // For each food item on the menu, render it

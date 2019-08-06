@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.jumbotron {
+	margin: 0;
+}
+
 .text-center {
 	text-align: center;
 }
@@ -19,13 +23,62 @@
 	box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
 }
 
+.btn-link:hover {
+	transition: all 0.1s ease-in;
+}
+
+.btn-link:hover {
+	text-decoration: none;
+	transform: scale(1.05);
+	transition: all 0.1s ease-out;
+}
+
+nav {
+	display: flex;
+	overflow: hidden;
+	justify-content: space-between;
+	align-items: center;
+	background: #232323;
+	color: #FAFAFA;
+	box-shadow: 3px 3px 4px 0px rgba(0,0,0,0.25);
+}
+
+nav .link-list {
+	display: flex;
+	list-style: none;
+	margin-left: auto;
+}
+
+nav a {
+	text-decoration: none;
+	color: #FAFAFA;
+}
+
+nav .brand {
+	font-weight: 400;
+	font-size: 30px;
+}
+
+nav .link-list a {
+	padding: 20px;
+	font-size: 20px;
+	font-weight: 300;
+}
+
+nav a:hover {
+	color: #D0D0D0;
+	text-decoration: none;
+}
+
 
 .header {
 	padding: 20px 0;
 	text-align:center;
+	margin: 0 auto;
 }
 
 .header > * {
+	display: inline-block;
 	text-align: center;
 }
 
@@ -52,8 +105,9 @@
 }
 
 .datePickerLabel {
-	margin-left: 30px;
-	margin-right: 10px;
+	margin: 0;
+	font-size: 25px;
+	font-weight: 400;
 }
 
 .weekMenu-container {
@@ -159,6 +213,29 @@ footer {
 	display: grid;
 	grid-template-columns: 1fr auto;
 	justify-content: space-between;
+}
+
+.helpItem {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+.helpItem img {
+	border-radius: 20px;
+	max-width: 70vw;
+}
+
+.helpText {
+	margin-left: 30px;
+	margin-top: 30px;
+	width: 500px;
+}
+
+#overallMenu {
+	display: flex;
+	flex-direction: column;
 }
 
 @media only screen and (max-width: 1500px) {

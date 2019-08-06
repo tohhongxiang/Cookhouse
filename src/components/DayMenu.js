@@ -1,5 +1,5 @@
 import React from 'react';
-import SubMenu from "./SubMenu"
+import Meal from "./Meal"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import { displayDate, displayDay, getTodayDate } from "../utils/helpers";
@@ -19,6 +19,7 @@ class DayMenu extends React.Component {
 	}
 
 	handleSubmit = (e) => {
+		console.log(this.textInputRef);
 		if (this.state.mealValue.length > 0){
 			this.props.addMeal(this.state.mealValue, this.props.date);
 			this.setState({
@@ -55,12 +56,21 @@ class DayMenu extends React.Component {
 	}
 
 	render(){
-		let menusToDisplay = this.props.menuOfTheDay.map(menu => (
-			<SubMenu mealType={menu.mealType} menuList={menu.menuList} deleteFood={this.deleteFood} addFood={this.addFood} deleteMenu={this.deleteMenu} addMeal={this.addMeal} deleteMeal={this.deleteMeal} addMenu={this.addMenu}/>
-		));
-
-		if (menusToDisplay.length <= 0) {
-			menusToDisplay = (<h3 className="text-center"> No meal set </h3>);
+		let menusToDisplay;
+		if (this.props.menuOfTheDay.length > 0) {
+			menusToDisplay = this.props.menuOfTheDay.map(menu => 
+			<Meal 
+			mealType={menu.mealType} 
+			menuList={menu.menuList} 
+			deleteFood={this.deleteFood} 
+			addFood={this.addFood} 
+			deleteMenu={this.deleteMenu} 
+			addMeal={this.addMeal} 
+			deleteMeal={this.deleteMeal} 
+			addMenu={this.addMenu}/>
+		);
+		} else {
+			menusToDisplay = <h4 className="text-center"><i> No meal set </i></h4>;
 		}
 
 		let classNames = "dayMenu-container ";

@@ -17,7 +17,6 @@ class Header extends React.Component {
 	render() {
 		return (
 		<div className="header">
-			<h1> Welcome to the cookhouse </h1>
 			<Form className="date-pickers">
 				<div className="startDatePicker-container">
 					<Form.Label className="datePickerLabel">
@@ -29,7 +28,8 @@ class Header extends React.Component {
 						selectsStart 
 						dateFormat="dd/MM/yyyy" 
 						selected={this.props.startDate} 
-						onChange={this.changeStartDate}/>
+						onChange={this.changeStartDate}
+						/>
 				</div>  
 				<div className="endDatePicker-container">
 					<Form.Label className="datePickerLabel">
