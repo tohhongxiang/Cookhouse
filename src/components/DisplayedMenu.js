@@ -18,7 +18,26 @@ class DisplayedMenu extends React.Component {
   }
   
   componentDidMount() {
-    axios.get("http://localhost:5000/api")
+    this.fetchData();
+  }
+
+  fetchData = () => {
+    // THIS CANNOT BE PUT IN COMPONENTDIDUPDATE
+    // if component updates, then fetch, then sets state again. 
+    // setting state causes rerender infinite loop
+    // very difficult in this case to put a shouldComponentUpdate
+    // because sometimes only the object within the object changes
+    // and deep copying the object hurts performance
+  
+    axios.get("http://localhost:5000/api", {
+      params: {
+        startDate: this.state.startDate.toISOString(),
+        endDate: this.state.endDate.toISOString()
+      } 
+      // params for a get request is in the request.query
+      // params for post request is in request.body
+      // req.params is for the url variables
+    })
     .then(res => {
       let data = res.data;
       data.forEach(date => {
@@ -28,173 +47,166 @@ class DisplayedMenu extends React.Component {
         overallMenu: data
       });
     }).catch(err => {
-      console.log("ERROROER", err);
+      console.log("ERROR: ", err);
     });
   }
 
 	changeStartDate = (time) => {
     this.setState({
     	startDate: new Date(time)
-		});
+    }, () => {
+      this.fetchData();
+    });
+    // either that or 
+    // this.setState({...}).then(()=>{...}) 
+    // since setState is an async function
+
+    // if we fetch data outside (without .then or callback)
+    // fetchdata will use the previous un-updated state
+    // because the state has not updated yet
 	}
 
 	changeEndDate = (time) => {
-	this.setState({
-		endDate: new Date(time)
-		});
-	}
-
-	deleteFood = (food, menuType, mealType, date, key) => {
-    let overallMenuCopy = [...this.state.overallMenu];
-    overallMenuCopy.forEach(day => {
-      if (day.date === date) {
-        day.menu.forEach(meal => {
-          if (meal.mealType === mealType) {
-            meal.menuList.forEach( subMenu => {
-              if (subMenu.subMenuType === menuType) {
-                subMenu.menuList = subMenu.menuList.filter(item => {
-                  return item !== food
-                });
-              }
-            });
-          };
-          return meal;
-        });
-      }
-      return day;
-    });
-
-    console.log(key);
-
-    // this.setState({
-    //   overallMenu: overallMenuCopy
-    // });
-  };
-
+    this.setState({
+      endDate: new Date(time)
+      }, () => {
+        this.fetchData();
+      });
+  }
+  
   addFood = (food, menuType, mealType, date) => {
     if (food) { // only add if not empty
-
-      let overallMenuCopy = [...this.state.overallMenu];
-      overallMenuCopy.forEach(day => {
-        if (day.date === date) {
-          day.menu.forEach(meal => {
-            if (meal.mealType === mealType) {
-              meal.menuList.forEach( subMenu => {
-                if (subMenu.subMenuType === menuType) {
-                  subMenu.menuList.push(food);
-                }
-              });
-            };
-            return meal;
+      let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
+      
+      currentUpdatedMenu.menu.forEach(meal => {
+        if (meal.mealType === mealType) {
+          meal.menuList.forEach( subMenu => {
+            if (subMenu.subMenuType === menuType) {
+              subMenu.menuList.push(food);
+            }
           });
-        }
-        return day;
+        };
+        return meal;
       });
-
-      this.setState({
-        overallMenu: overallMenuCopy
+        
+      const isoDate_ = new Date(date).toISOString();
+      axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+      .then(res => {
+        console.log(res.data);
+        this.fetchData();
       });
     }
   };
 
-  deleteMenu = (menuType, mealType, date) => {
-    let overallMenuCopy = [...this.state.overallMenu];
-      overallMenuCopy.forEach(day => {
-        if (day.date === date) {
-          day.menu.forEach(meal => {
-            if (meal.mealType === mealType) {
-              meal.menuList = meal.menuList.filter(subMenu => subMenu.subMenuType !== menuType);
-            };
-            return meal;
+	deleteFood = (food, menuType, mealType, date) => {
+    let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
+    currentUpdatedMenu.menu.forEach(meal => {
+      if (meal.mealType === mealType) {
+        meal.menuList.forEach( subMenu => {
+          if (subMenu.subMenuType === menuType) {
+            subMenu.menuList = subMenu.menuList.filter(item => {
+              return item !== food
+            });
+          }
+        });
+      };
+      return meal;
+    });
+
+    const isoDate_ = new Date(date).toISOString();
+    axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+    .then(res => {
+      console.log(res.data);
+      this.fetchData();
+    });
+  };
+
+  addMenu = (menuToAdd, mealType, date) => {
+    console.log(menuToAdd, mealType, date);
+    if (menuToAdd.length > 0) { // only add if not empty
+      let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
+      currentUpdatedMenu.menu.forEach(menu => {
+        if (menu.mealType === mealType) {
+          menu.menuList.push({
+            subMenuType: menuToAdd,
+            menuList: []
           });
         }
-        return day;
+        return menu
+      });  
+  
+      console.log(currentUpdatedMenu);
+      const isoDate_ = new Date(date).toISOString();
+      axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+      .then(res => {
+        console.log(res.data);
+        this.fetchData();
       });
+    }
+    }
 
-      this.setState({
-        overallMenu: overallMenuCopy
-      });
+  deleteMenu = (menuToDelete, mealType, date) => {
+    let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
+    currentUpdatedMenu.menu.forEach(menu => {
+      if (menu.mealType === mealType) {
+        menu.menuList = menu.menuList.filter(menu => menu.subMenuType !== menuToDelete);
+      }
+      return menu
+    });  
+
+    const isoDate_ = new Date(date).toISOString();
+    axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+    .then(res => {
+      console.log(res.data);
+      this.fetchData();
+    });
+  
   }
 
   addMeal = (meal, date) => {
-    let found = false;
-    let overallMenuCopy = [...this.state.overallMenu];
-    overallMenuCopy.forEach(day => { // Append the menu to the day if it exists
-        if (day.date === date) {
-          found = true;
-          day.menu.push({
+    // If the entire day doesnt exist, we need to add an entire entry
+    // If day exists, we need to modify the specific entry
+    let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
+    if (currentUpdatedMenu) {
+      currentUpdatedMenu.menu.push({
+        mealType: meal,
+        menuList: []
+      });
+      const isoDate_ = new Date(date).toISOString();
+      axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+      .then(res => {
+        console.log(res.data);
+        this.fetchData();
+      });
+    } else {
+      currentUpdatedMenu = {
+        date,
+        menu: [
+          {
             mealType: meal,
-            menuList: [],
-          });
-        }
-        return day
+            menuList: []
+          }
+        ]
+      };
+      axios.post('http://localhost:5000/api/', currentUpdatedMenu)
+      .then(res => {
+        console.log(res.data);
+        this.fetchData();
       });
-
-    if (!found) {
-      overallMenuCopy.push({
-        date: date,
-        id: uuid.v4(),
-        menu: [{
-          mealType: meal,
-          menuList: []
-        }]
-      });
-    };
-
-    this.setState({
-      overallMenu: overallMenuCopy,
-    });
-  }
-
- addMenu = (menuToAdd, mealType, date) => {
-  console.log(menuToAdd, mealType, date);
-  if (menuToAdd.length > 0){
-    let overallMenuCopy = [...this.state.overallMenu];
-    overallMenuCopy.forEach(day => { // Append the menu to the day if it exists
-        if (day.date === date) {
-          day.menu.forEach(menu => {
-            if (menu.mealType === mealType) {
-              menu.menuList.push({
-                "subMenuType": menuToAdd,
-                "menuList": []
-              });
-            }
-            return menu;
-          })
-        }
-        return day;
-      });
-
-    this.setState({
-      overallMenu: overallMenuCopy,
-    });
-  }
-    
+    }
   }
 
   deleteMeal = (mealType, date) => {
-    let overallMenuCopy = [...this.state.overallMenu];
-      overallMenuCopy.forEach(day => {
-        if (day.date === date) {
-          day.menu = day.menu.filter(item => item.mealType !== mealType);
-        }
-        return day;
-      });
-
-      this.setState({
-        overallMenu: overallMenuCopy
-      });
+    const isoDate_ = new Date(date).toISOString();
+    axios.delete('http://localhost:5000/api/' + isoDate_)
+    .then(res => {
+      console.log(res.data);
+      this.fetchData();
+    });
   }
-
-
 
   render(){
     let { startDate, endDate, overallMenu } = this.state;
-
-    // let overallMenus = this.state.overallMenu
-    // .filter(menu => menu.date >= startDate && menu.date <= endDate)
-    // .map(day => (<DayMenu menuOfTheDay={day} key={day.id} deleteFood={this.deleteFood} addFood={this.addFood}/>));
-
     let displayedMenus = [];
     let dateRange = [];
 

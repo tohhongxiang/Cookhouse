@@ -36,7 +36,7 @@ class DayMenu extends React.Component {
 	}
 
 	deleteFood = (food, menuType, mealType) => {
-		this.props.deleteFood(food, menuType, mealType, this.props.date, this.key);
+		this.props.deleteFood(food, menuType, mealType, this.props.date);
 	};
 
 	addFood = (food, menuType, mealType) => {

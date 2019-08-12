@@ -16,4 +16,14 @@ const DaySchema = new Schema({
     menu: [MealSchema]
 });
 
+DaySchema.statics.findByDate = function(date, callback) {
+    return this.find({date}, callback);
+}
+
+DaySchema.statics.updateByDate = function(date, updatedDay) {
+    let currentDay = this.find({date});
+    currentDay = {...updatedDay};
+    currentDay.save()
+}
+
 module.exports = mongoose.model("DayMenus", DaySchema);

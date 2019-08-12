@@ -41,9 +41,15 @@ class Menu extends React.Component{
 	}
 
 	render() {
-		let foodList = this.props.foodList.map(food => 
-			<FoodItem food={food} key={uuid.v4()} deleteFood={this.deleteFood}/> // For each food item on the menu, render it
-		);
+		let foodList;
+		if (this.props.foodList) {
+			foodList = this.props.foodList.map(food => 
+				<FoodItem food={food} key={uuid.v4()} deleteFood={this.deleteFood}/> // For each food item on the menu, render it
+			);
+		} else {
+			foodList = [];
+		}
+		
 		let menuType = this.props.menuType;
 
 		return (

@@ -4,17 +4,18 @@ const router = express.Router();
 const DayMenus = require('../models/DayMenusModel.js');
 
 // GET ALL 
-router.get('/', (req, res) => {
+router.get('/all', (req, res) => {
     DayMenus.find()
-    .sort({date: -1})
+    .sort({date: 1})
     .then( dayMenus => {
         res.json(dayMenus);
     })
 });
 
+// GET ONE BY ID
 router.get('/:id', (req, res) => {
     const id = req.params.id;
-    DayMenus.findById(id, (err, daymenu) => {
+    DayMenus.find(id, (err, daymenu) => {
         if (!daymenu) {
             res.status(404).json({
                 msg:`Failed to find data with id ${id}`
@@ -25,6 +26,23 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// GET ALL WITHIN STARTDATE AND ENDDATE (INCLUSIVE)
+router.get('/', (req, res) => {
+    const {startDate, endDate} = req.query;
+    DayMenus.find({
+        date: {$gte: startDate, $lte: endDate}
+    }).sort({date: 1}) //sort by ascending dates
+    .then(daymenus => {
+        res.json(daymenus);
+    }).catch(err => {
+        res.json({
+            msg: "Failed",
+            err
+        });
+    });
+})
+
+// Add new menu
 router.post('/', (req, res) => {
     const newMenu = new DayMenus({
         ...req.body
@@ -38,41 +56,43 @@ router.post('/', (req, res) => {
     })).catch(err => console.log(err));
 });
 
-router.put('/:id', (req, res) => {
-    const id = req.params.id;
-    console.log(req.body);
+// Delete menu by date
+router.delete('/:date', (req, res) => {
+    const date = req.params.date;
+    DayMenus.deleteOne({date}, (err) => {
+        if (err) {
+            console.log(err);
+            res.json({
+                msg: "Failed",
+                err
+            });
+        } else {
+            res.json({
+                msg: "Success",
+                date
+            });
+        } 
+    })
+});
+
+//modify menu
+router.post('/:date', (req, res) => {
+    const date = req.params.date;
     const updatedMenu = new DayMenus({
         ...req.body
     });
-    DayMenus.findById(id, (err, daymenu) => {
-        if (!daymenu) {
-            res.status(404).json({
-                msg:`Failed to find data with id ${id}`
+    console.log(updatedMenu);
+    DayMenus.updateOne({date}, updatedMenu, (err, daymenu) => {
+        if (err) {
+            res.json({
+                msg:"Failed"
             });
         } else {
-            daymenu.date = updatedMenu.date;
-            daymenu.menu = updatedMenu.menu;
-            console.log("DAT DAYMENYU", daymenu);
-            daymenu.save().then(daymenu => {
-                console.log("Updated daymenu");
-                res.json({
-                    msg: "Updated menu successfully",
-                    daymenu
-                });
-            }).catch(err => {
-                console.log(err);
-                res.json({
-                    msg: "Failed to update menu",
-                    err
-                });
-            });
+            res.json({
+                msg:"success",
+                updatedMenu
+            })
         }
-    }).catch(err => {
-        console.log(err);
-        res.json({
-            msg: "Failed to update menu",
-            err
-        });
     });
 });
 
