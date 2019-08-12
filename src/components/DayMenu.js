@@ -7,6 +7,7 @@ import { displayDate, displayDay, getTodayDate } from "../utils/helpers";
 class DayMenu extends React.Component {
 	constructor(props) {
 		super(props);
+		this.textInputRef = React.createRef();
 		this.state = {
 			mealValue: "",
 		};
@@ -21,7 +22,7 @@ class DayMenu extends React.Component {
 	handleSubmit = (e) => {
 		console.log(this.textInputRef);
 		if (this.state.mealValue.length > 0){
-			this.props.addMeal(this.state.mealValue, this.props.date);
+			this.props.addMeal(this.state.mealValue, this.props.date, this.textInputRef.current);
 			this.setState({
 				mealValue: "",
 			});
@@ -86,8 +87,12 @@ class DayMenu extends React.Component {
 					<h2>{displayDay(this.props.date)}</h2>
 					<Form className="add-meal form-group">
 						<Form.Control 
+						key={this.props.date}
+						ref={this.textInputRef}
 						type="text" 
 						className="add-meal" 
+						name="add-meal"
+						id="add-meal"
 						placeholder="Add Meal" 
 						onChange={this.handleChange} 
 						value={this.state.mealValue} 

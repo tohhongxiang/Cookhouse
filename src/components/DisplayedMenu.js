@@ -21,7 +21,7 @@ class DisplayedMenu extends React.Component {
     this.fetchData();
   }
 
-  fetchData = () => {
+  fetchData = async () => {
     // THIS CANNOT BE PUT IN COMPONENTDIDUPDATE
     // if component updates, then fetch, then sets state again. 
     // setting state causes rerender infinite loop
@@ -163,7 +163,7 @@ class DisplayedMenu extends React.Component {
   
   }
 
-  addMeal = (meal, date) => {
+  addMeal = (meal, date, elementToFocus) => {
     // If the entire day doesnt exist, we need to add an entire entry
     // If day exists, we need to modify the specific entry
     let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
@@ -191,18 +191,32 @@ class DisplayedMenu extends React.Component {
       axios.post('http://localhost:5000/api/', currentUpdatedMenu)
       .then(res => {
         console.log(res.data);
-        this.fetchData();
+        this.fetchData().then(() => {
+          elementToFocus.focus();
+        });
       });
     }
   }
 
   deleteMeal = (mealType, date) => {
+    let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
+    currentUpdatedMenu.menu = currentUpdatedMenu.menu.filter(menu => menu.mealType !== mealType);
+
     const isoDate_ = new Date(date).toISOString();
-    axios.delete('http://localhost:5000/api/' + isoDate_)
-    .then(res => {
-      console.log(res.data);
-      this.fetchData();
-    });
+    if (currentUpdatedMenu.menu.length > 0) {
+      axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+      .then(res => {
+        console.log(res.data);
+        this.fetchData();
+      });
+    } else {
+      axios.delete('http://localhost:5000/api/' + isoDate_)
+      .then(res => {
+        console.log(res.data);
+        this.fetchData();
+      });
+    }
+      
   }
 
   render(){
@@ -226,7 +240,7 @@ class DisplayedMenu extends React.Component {
       }
 
       if (!found) {
-        displayedMenus.push({"date": new Date(dateRange[i]), "id": uuid.v4(), "menu":[]});
+        displayedMenus.push({"date": new Date(dateRange[i]), "menu":[]});
       }
     }
 
@@ -234,7 +248,7 @@ class DisplayedMenu extends React.Component {
       <DayMenu 
       date={day.date}
       menuOfTheDay={day.menu} 
-      key={day._id} 
+      key={day.date}
       deleteFood={this.deleteFood} 
       addFood={this.addFood} 
       deleteMenu={this.deleteMenu}
