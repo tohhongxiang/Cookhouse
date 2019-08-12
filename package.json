@@ -28,7 +28,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "server": "nodemon server --prefix backend",
-    "dev": "concurrently \"npm run start\" \"npm run server\""
+    "dev": "concurrently \"npm run start\" \"npm run server\"",
+    "install_all": "concurrently \"npm install\" \"npm install --prefix backend\""
   },
   "eslintConfig": {
     "extends": "react-app"
