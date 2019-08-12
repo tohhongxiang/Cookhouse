@@ -52,7 +52,7 @@ class Meal extends React.Component {
 		let displayedMenuList;
 		if (this.props.menuList.length > 0) {
 			displayedMenuList = this.props.menuList.map(item => 
-				<Menu menuType={item.subMenuType} foodList={item.menuList} deleteFood={this.deleteFood} addFood={this.addFood} deleteMenu={this.deleteMenu}/>);
+				<Menu key={item._id} menuType={item.subMenuType} foodList={item.menuList} deleteFood={this.deleteFood} addFood={this.addFood} deleteMenu={this.deleteMenu}/>);
 		} else {
 			displayedMenuList = <h5><i> No menu set </i></h5>;
 		}

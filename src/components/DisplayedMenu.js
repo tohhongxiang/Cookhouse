@@ -4,6 +4,7 @@ import Header from "./Header"
 import {getCurrentWeek} from "../utils/helpers"
 import uuid from "uuid"
 import DayMenu from './DayMenu'
+import axios from "axios";
 
 class DisplayedMenu extends React.Component {
 	constructor(props) {
@@ -12,111 +13,24 @@ class DisplayedMenu extends React.Component {
 		this.state = {
 		startDate: startDate,
     endDate: endDate,
-		overallMenu: 
-      [{"date": new Date(2019,7,1), 
-      "id": uuid.v4(), 
-      "menu": [
-      {
-        "mealType": "Breakfast",
-        "menuList": [
-          {
-            "subMenuType":"Muslim",
-            "menuList": [
-              "Muslim food 1 Breakfast",
-              "Muslim food 2 Breakfast",
-              "Muslim food 3 Breakfast"
-            ]
-          },
-          {
-            "subMenuType":"Non-Muslim",
-            "menuList": [
-              "Non-Muslim food 1 Breakfast",
-              "Non-Muslim food 2 Breakfast",
-              "Non-Muslim food 3 Breakfast"
-            ]
-          },
-          {
-            "subMenuType":"Vegetarian",
-            "menuList": [
-              "Vegetarian food 1 Breakfast",
-              "Vegetarian food 2 Breakfast",
-              "Vegetarian food 3 Breakfast"
-            ]
-          },
-        ]
-      },
-      {
-        "mealType": "Lunch",
-        "menuList": [
-          {
-            "subMenuType":"Muslim",
-            "menuList": [
-              "Muslim food 1 Lunch",
-              "Muslim food 2 Lunch",
-              "Muslim food 3 Lunch"
-            ]
-          },
-          {
-            "subMenuType":"Non-Muslim",
-            "menuList": [
-              "Non-Muslim food 1 Lunch",
-              "Non-Muslim food 2 Lunch",
-              "Non-Muslim food 3 Lunch"
-            ]
-          },
-          {
-            "subMenuType":"Vegetarian",
-            "menuList": [
-              "Vegetarian food 1 Lunch",
-              "Vegetarian food 2 Lunch",
-              "Vegetarian food 3 Lunch"
-            ]
-          },
-        ]
-      },
-      {
-        "mealType": "Dinner",
-        "menuList": [
-          {
-            "subMenuType":"Muslim",
-            "menuList": [
-              "Muslim food 1 Dinner",
-              "Muslim food 2 Dinner",
-              "Muslim food 3 Dinner"
-            ]
-          },
-          {
-            "subMenuType":"Non-Muslim",
-            "menuList": [
-              "Non-Muslim food 1 Dinner",
-              "Non-Muslim food 2 Dinner",
-              "Non-Muslim food 3 Dinner"
-            ]
-          },
-          {
-            "subMenuType":"Vegetarian",
-            "menuList": [
-              "Vegetarian food 1 Dinner",
-              "Vegetarian food 2 Dinner",
-              "Vegetarian food 3 Dinner"
-            ]
-          },
-        ]
-      }] 
-      }, 
-      {"date": new Date(2019,7,2), 
-      "id": uuid.v4(), 
-      "menu": [
-      {
-        "mealType": "Breakfast",
-        "menuList": []
-      },
-      
-      ] 
-      }
-      ]
-		}
-	}
+		overallMenu: []
+    }
+  }
+  
+  componentDidMount() {
+    axios.get("http://localhost:5000/api")
+    .then(res => {
+      let data = res.data;
+      data.forEach(date => {
+        date.date = new Date(date.date);
+      })
+      this.setState({
+        overallMenu: data
+      });
+    }).catch(err => {
+      console.log("ERROROER", err);
+    });
+  }
 
 	changeStartDate = (time) => {
     this.setState({
@@ -130,7 +44,7 @@ class DisplayedMenu extends React.Component {
 		});
 	}
 
-	deleteFood = (food, menuType, mealType, date) => {
+	deleteFood = (food, menuType, mealType, date, key) => {
     let overallMenuCopy = [...this.state.overallMenu];
     overallMenuCopy.forEach(day => {
       if (day.date === date) {
@@ -150,9 +64,11 @@ class DisplayedMenu extends React.Component {
       return day;
     });
 
-    this.setState({
-      overallMenu: overallMenuCopy
-    });
+    console.log(key);
+
+    // this.setState({
+    //   overallMenu: overallMenuCopy
+    // });
   };
 
   addFood = (food, menuType, mealType, date) => {
@@ -289,7 +205,8 @@ class DisplayedMenu extends React.Component {
     for (let i=0;i< dateRange.length; i++) {
       let found = false;
       for (let j=0; j<overallMenu.length; j++) {
-        if (overallMenu[j].date.getTime() === dateRange[i].getTime()) {
+        const currentMenuDate = new Date(overallMenu[j].date);
+        if (currentMenuDate.getTime() === dateRange[i].getTime()) {
           displayedMenus.push(overallMenu[j]);
           found = true;
           break;
@@ -305,7 +222,7 @@ class DisplayedMenu extends React.Component {
       <DayMenu 
       date={day.date}
       menuOfTheDay={day.menu} 
-      key={day.id} 
+      key={day._id} 
       deleteFood={this.deleteFood} 
       addFood={this.addFood} 
       deleteMenu={this.deleteMenu}

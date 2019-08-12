@@ -36,7 +36,7 @@ class DayMenu extends React.Component {
 	}
 
 	deleteFood = (food, menuType, mealType) => {
-		this.props.deleteFood(food, menuType, mealType, this.props.date);
+		this.props.deleteFood(food, menuType, mealType, this.props.date, this.key);
 	};
 
 	addFood = (food, menuType, mealType) => {
@@ -59,7 +59,8 @@ class DayMenu extends React.Component {
 		let menusToDisplay;
 		if (this.props.menuOfTheDay.length > 0) {
 			menusToDisplay = this.props.menuOfTheDay.map(menu => 
-			<Meal 
+			<Meal
+			key={menu._id} 
 			mealType={menu.mealType} 
 			menuList={menu.menuList} 
 			deleteFood={this.deleteFood} 
