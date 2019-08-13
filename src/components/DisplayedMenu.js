@@ -29,7 +29,7 @@ class DisplayedMenu extends React.Component {
     // because sometimes only the object within the object changes
     // and deep copying the object hurts performance
   
-    axios.get("http://localhost:5000/api", {
+    axios.get("/api", {
       params: {
         startDate: this.state.startDate.toISOString(),
         endDate: this.state.endDate.toISOString()
@@ -90,7 +90,7 @@ class DisplayedMenu extends React.Component {
       });
         
       const isoDate_ = new Date(date).toISOString();
-      axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+      axios.post('/api/' + isoDate_, currentUpdatedMenu)
       .then(res => {
         console.log(res.data);
         this.fetchData();
@@ -114,7 +114,7 @@ class DisplayedMenu extends React.Component {
     });
 
     const isoDate_ = new Date(date).toISOString();
-    axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+    axios.post('/api/' + isoDate_, currentUpdatedMenu)
     .then(res => {
       console.log(res.data);
       this.fetchData();
@@ -137,7 +137,7 @@ class DisplayedMenu extends React.Component {
   
       console.log(currentUpdatedMenu);
       const isoDate_ = new Date(date).toISOString();
-      axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+      axios.post('/api/' + isoDate_, currentUpdatedMenu)
       .then(res => {
         console.log(res.data);
         this.fetchData();
@@ -155,7 +155,7 @@ class DisplayedMenu extends React.Component {
     });  
 
     const isoDate_ = new Date(date).toISOString();
-    axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+    axios.post('/api/' + isoDate_, currentUpdatedMenu)
     .then(res => {
       console.log(res.data);
       this.fetchData();
@@ -173,7 +173,7 @@ class DisplayedMenu extends React.Component {
         menuList: []
       });
       const isoDate_ = new Date(date).toISOString();
-      axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+      axios.post('/api/' + isoDate_, currentUpdatedMenu)
       .then(res => {
         console.log(res.data);
         this.fetchData();
@@ -188,7 +188,7 @@ class DisplayedMenu extends React.Component {
           }
         ]
       };
-      axios.post('http://localhost:5000/api/', currentUpdatedMenu)
+      axios.post('/api/', currentUpdatedMenu)
       .then(res => {
         console.log(res.data);
         this.fetchData().then(() => {
@@ -204,13 +204,13 @@ class DisplayedMenu extends React.Component {
 
     const isoDate_ = new Date(date).toISOString();
     if (currentUpdatedMenu.menu.length > 0) {
-      axios.post('http://localhost:5000/api/' + isoDate_, currentUpdatedMenu)
+      axios.post('/api/' + isoDate_, currentUpdatedMenu)
       .then(res => {
         console.log(res.data);
         this.fetchData();
       });
     } else {
-      axios.delete('http://localhost:5000/api/' + isoDate_)
+      axios.delete('/api/' + isoDate_)
       .then(res => {
         console.log(res.data);
         this.fetchData();
