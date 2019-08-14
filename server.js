@@ -11,6 +11,7 @@ const app = express();
 app.use(express.json()); 
 app.use(cors());
 app.use('/Cookhouse/', express.static(path.join(__dirname, "client", "build"))); // serving static files from the ./client/build 
+// when building client, it is assumed that the client is hosted at /Cookhouse. So we serve from there
 
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true}) // CONNECT TO MONGODB
 .then(()=> {
