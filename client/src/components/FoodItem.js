@@ -1,7 +1,7 @@
 import React from "react"
 import Button from "react-bootstrap/Button"
 
-class FoodItem extends React.Component {
+class FoodItem extends React.PureComponent {
 	deleteFood = (e) => {
 		this.props.deleteFood(this.props.food);
 	};

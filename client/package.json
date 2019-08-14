@@ -1,0 +1,60 @@
+{
+  "name": "cookhouse",
+  "version": "0.1.0",
+  "homepage": "https://tohhongxiang123.github.io/Cookhouse",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "concurrently": "^4.1.1",
+    "express": "^4.17.1",
+    "gh-pages": "^2.0.1",
+    "nedb": "^1.8.0",
+    "nodemon": "^1.19.1",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.10",
+    "react-datepicker": "^2.8.0",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
+    "serve": "^11.1.0",
+    "uuid": "^3.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "dev": "concurrently \"npm run start\" \"npm run server\""
+  },
+  "proxy":"http://localhost:5000",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "Run with `npm start`",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tohhongxiang123/Cookhouse.git"
+  },
+  "author": "tohhongxiang123",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tohhongxiang123/Cookhouse/issues"
+  }
+}

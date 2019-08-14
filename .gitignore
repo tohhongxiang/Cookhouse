@@ -23,5 +23,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# backend gitignores
-/backend/node_modules
+# client gitignores
+/client/node_modules

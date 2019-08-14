@@ -8,7 +8,7 @@ import finishedMenu from "../images/finishedMenu.png"
 
 export default function Help() {
 	return (
-			<Jumbotron className="help-container">
+			<Jumbotron className="helpContainer">
 				<h1> Help section </h1>
 				<p> Here are examples of sample data </p>
 				<div className="helpImages">

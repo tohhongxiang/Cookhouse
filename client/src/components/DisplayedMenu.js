@@ -1,9 +1,8 @@
-import React from "react"
-import Jumbotron from "react-bootstrap/Jumbotron"
-import Header from "./Header"
-import {getCurrentWeek} from "../utils/helpers"
-import uuid from "uuid"
-import DayMenu from './DayMenu'
+import React from "react";
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Header from "./Header";
+import {getCurrentWeek} from "../utils/helpers";
+import DayMenu from './DayMenu';
 import axios from "axios";
 
 class DisplayedMenu extends React.Component {
