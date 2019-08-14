@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server",
     "app": "npm run start --prefix client",
-    "dev": "concurrently \"npm run app\" \"npm run server\""
+    "dev": "concurrently \"npm run app\" \"npm run server\"",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "author": "tohhongxiang123",
   "license": "MIT",
@@ -18,5 +20,8 @@
     "express": "^4.17.1",
     "lodash": "^4.17.15",
     "mongoose": "^5.6.9"
+  },
+  "engines": {
+    "node": "8.9.2"
   }
 }
