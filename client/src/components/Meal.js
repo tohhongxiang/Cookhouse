@@ -3,7 +3,7 @@ import Menu from "./Menu"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 
-class Meal extends React.Component {
+export default class Meal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.textRef = React.createRef();
@@ -69,18 +69,27 @@ class Meal extends React.Component {
 			<div className="meal-container">
 				<div className="meal-container-header">
 					<h3> {this.props.mealType} </h3>
-					<Button variant="link" size="lg" onClick={this.deleteMeal} className="deleteMeal">&#x274C;</Button>
+					<Button variant="link" size="lg" onClick={this.deleteMeal} className="deleteMeal"><span role="img" aria-label="Close">&#x274C;</span></Button>
 				</div>
 				{displayedMenuList}
 				<Form className="add-menu-container form-group">
-					<Form.Control type="text" ref={this.textRef} className="add-menu" placeholder="Add Menu" onChange={this.handleChange} value={this.state.menuValue} onKeyDown={this.handleKeyDown} />
+					<Form.Control 
+					type="text" 
+					list="menu-choices"
+					ref={this.textRef} 
+					className="add-menu" 
+					placeholder="Add Menu" 
+					onChange={this.handleChange} 
+					value={this.state.menuValue} 
+					onKeyDown={this.handleKeyDown} />
+					<datalist id="menu-choices">
+							<option value="Muslim" />
+							<option value="Non-Muslim" />
+							<option value="Vegetarian" />
+						</datalist>
 					<Button variant="primary" className="add-menu" onClick={this.handleSubmit}>+</Button>
 				</Form>
 			</div>
 		)
 	}
 }
-
-
-
-export default Meal

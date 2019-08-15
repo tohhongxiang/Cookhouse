@@ -95,7 +95,7 @@ export default class DayMeal extends React.Component {
 						key={this.props.date}
 						ref={this.textRef}
 						type="text" 
-						list="menu-choices"
+						list="meal-choices"
 						className="add-meal" 
 						name="add-meal"
 						id="add-meal"
@@ -104,7 +104,7 @@ export default class DayMeal extends React.Component {
 						onChange={this.handleChange} 
 						value={this.state.mealValue} 
 						onKeyDown={this.handleKeyDown} />
-						<datalist id="menu-choices">
+						<datalist id="meal-choices">
 							<option value="Breakfast" />
 							<option value="Lunch" />
 							<option value="Dinner" />

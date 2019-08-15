@@ -6,7 +6,7 @@ export default function About() {
 	return (
 		<Jumbotron className="about-container">
 			<h1> About </h1>
-			<p> Small project in React done by <strong><a style={aStyle} href="https://github.com/tohhongxiang123">tohhongxiang123</a></strong> </p>
+			<p> Small project using MongoDB, Express, React and Node. Done by <strong><a style={aStyle} href="https://github.com/tohhongxiang123">tohhongxiang123</a></strong> </p>
 			<p> Raise any issues on the <strong><a style={aStyle} href="https://github.com/tohhongxiang123/Cookhouse">GitHub repository</a></strong> </p>
 		</Jumbotron>
 		)
