@@ -2,10 +2,10 @@ import React from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Header from "./Header";
 import {getCurrentWeek} from "../utils/helpers";
-import DayMenu from './DayMenu';
+import DayMeal from './DayMeal';
 import axios from "axios";
 
-class DisplayedMenu extends React.Component {
+class DisplayedMeal extends React.Component {
 	constructor(props) {
 		super(props);
 		let {startDate, endDate} = getCurrentWeek();
@@ -121,7 +121,6 @@ class DisplayedMenu extends React.Component {
   };
 
   addMenu = (menuToAdd, mealType, date) => {
-    console.log(menuToAdd, mealType, date);
     if (menuToAdd.length > 0) { // only add if not empty
       let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
       currentUpdatedMenu.menu.forEach(menu => {
@@ -134,7 +133,6 @@ class DisplayedMenu extends React.Component {
         return menu
       });  
   
-      console.log(currentUpdatedMenu);
       const isoDate_ = new Date(date).toISOString();
       axios.post('/api/' + isoDate_, currentUpdatedMenu)
       .then(res => {
@@ -162,7 +160,7 @@ class DisplayedMenu extends React.Component {
   
   }
 
-  addMeal = (meal, date, elementToFocus) => {
+  addMeal = (meal, date) => {
     // If the entire day doesnt exist, we need to add an entire entry
     // If day exists, we need to modify the specific entry
     let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
@@ -190,9 +188,7 @@ class DisplayedMenu extends React.Component {
       axios.post('/api/', currentUpdatedMenu)
       .then(res => {
         console.log(res.data);
-        this.fetchData().then(() => {
-          elementToFocus.focus();
-        });
+        this.fetchData();
       });
     }
   }
@@ -220,7 +216,7 @@ class DisplayedMenu extends React.Component {
 
   render(){
     let { startDate, endDate, overallMenu } = this.state;
-    let displayedMenus = [];
+    let displayedMeals = [];
     let dateRange = [];
 
     for (let d = new Date(startDate); d<=endDate; d.setDate(d.getDate() + 1)) { // PASS BY REFERENCE, CREATE A NEW COPY FIRST
@@ -232,19 +228,19 @@ class DisplayedMenu extends React.Component {
       for (let j=0; j<overallMenu.length; j++) {
         const currentMenuDate = new Date(overallMenu[j].date);
         if (currentMenuDate.getTime() === dateRange[i].getTime()) {
-          displayedMenus.push(overallMenu[j]);
+          displayedMeals.push(overallMenu[j]);
           found = true;
           break;
         } 
       }
 
       if (!found) {
-        displayedMenus.push({"date": new Date(dateRange[i]), "menu":[]});
+        displayedMeals.push({"date": new Date(dateRange[i]), "menu":[]});
       }
     }
 
-    displayedMenus = displayedMenus.map(day => (
-      <DayMenu 
+    displayedMeals = displayedMeals.map(day => (
+      <DayMeal 
       date={day.date}
       menuOfTheDay={day.menu} 
       key={day.date}
@@ -260,11 +256,11 @@ class DisplayedMenu extends React.Component {
     	<div>
     	<Header startDate={this.state.startDate} endDate={this.state.endDate} changeStartDate={this.changeStartDate} changeEndDate={this.changeEndDate}/>
         <Jumbotron className="weekMenu-container">
-          {displayedMenus}
+          {displayedMeals}
         </Jumbotron>
         </div>
       )
   }
 }
 
-export default DisplayedMenu
+export default DisplayedMeal

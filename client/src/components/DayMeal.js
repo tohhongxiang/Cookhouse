@@ -1,13 +1,13 @@
 import React from 'react';
-import Meal from "./Meal"
-import Form from "react-bootstrap/Form"
-import Button from "react-bootstrap/Button"
+import Meal from "./Meal";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import { displayDate, displayDay, getTodayDate } from "../utils/helpers";
 
-class DayMenu extends React.Component {
+export default class DayMeal extends React.Component {
 	constructor(props) {
 		super(props);
-		this.textInputRef = React.createRef();
+		this.textRef = React.createRef();
 		this.state = {
 			mealValue: "",
 		};
@@ -20,13 +20,18 @@ class DayMenu extends React.Component {
 	}
 
 	handleSubmit = (e) => {
-		console.log(this.textInputRef);
-		if (this.state.mealValue.length > 0){
-			this.props.addMeal(this.state.mealValue, this.props.date, this.textInputRef.current);
-			this.setState({
-				mealValue: "",
-			});
+		if (this.state.mealValue.replace(/\s/g, '').length > 0){
+			this.props.addMeal(this.state.mealValue, this.props.date);
+			this.textRef.current.placeholder = "Add Meal";
+			this.textRef.current.classList.remove("invalid");
+			} else {
+				this.textRef.current.placeholder = "No empty values";
+				this.textRef.current.classList.add("invalid");
 			}
+			// this.props.addMeal(this.state.mealValue, this.props.date);
+		this.setState({
+			mealValue: "",
+		});
 		e.preventDefault();
 	}
 
@@ -75,28 +80,35 @@ class DayMenu extends React.Component {
 			menusToDisplay = <h4 className="text-center"><i> No meal set </i></h4>;
 		}
 
-		let classNames = "dayMenu-container ";
+		let classNames = "dayMeal-container ";
 		if (getTodayDate().getTime() === this.props.date.getTime()) {
 			classNames += "active";
 		}
 		
 		return (
 			<div className={classNames}> 
-				<div className="dayMenu-header text-center">
+				<div className="dayMeal-header text-center">
 					<h2>{displayDate(this.props.date)}</h2>
 					<h2>{displayDay(this.props.date)}</h2>
 					<Form className="add-meal form-group">
 						<Form.Control 
 						key={this.props.date}
-						ref={this.textInputRef}
+						ref={this.textRef}
 						type="text" 
+						list="menu-choices"
 						className="add-meal" 
 						name="add-meal"
 						id="add-meal"
 						placeholder="Add Meal" 
+						autoComplete="off"
 						onChange={this.handleChange} 
 						value={this.state.mealValue} 
 						onKeyDown={this.handleKeyDown} />
+						<datalist id="menu-choices">
+							<option value="Breakfast" />
+							<option value="Lunch" />
+							<option value="Dinner" />
+						</datalist>
 						<Button variant="primary" onClick={this.handleSubmit}>+</Button>
 					</Form>
 				</div>
@@ -108,4 +120,3 @@ class DayMenu extends React.Component {
 	}
 }
 
-export default DayMenu;

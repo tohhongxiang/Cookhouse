@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form"
 class Meal extends React.Component {
 	constructor(props) {
 		super(props);
+		this.textRef = React.createRef();
 		this.state = {
 			menuValue: "",
 		}
@@ -18,7 +19,15 @@ class Meal extends React.Component {
 	}
 
 	handleSubmit = (e) => {
-		this.props.addMenu(this.state.menuValue, this.props.mealType);
+		if (this.state.menuValue.replace(/\s/g, '').length > 0) {
+			this.props.addMenu(this.state.menuValue, this.props.mealType);
+			this.textRef.current.placeholder = "Add Menu";
+			this.textRef.current.classList.remove("invalid");
+		} else {
+			this.textRef.current.placeholder = "No empty values";
+			this.textRef.current.classList.add("invalid");
+		}
+		
 		this.setState({
 			menuValue: "",
 		});
@@ -44,7 +53,6 @@ class Meal extends React.Component {
 	}
 
 	deleteMeal = () => {
-		console.log(this.props.mealType);
 		this.props.deleteMeal(this.props.mealType);
 	}
 
@@ -65,7 +73,7 @@ class Meal extends React.Component {
 				</div>
 				{displayedMenuList}
 				<Form className="add-menu-container form-group">
-					<Form.Control type="text" className="add-menu" placeholder="Add Menu" onChange={this.handleChange} value={this.state.menuValue} onKeyDown={this.handleKeyDown} />
+					<Form.Control type="text" ref={this.textRef} className="add-menu" placeholder="Add Menu" onChange={this.handleChange} value={this.state.menuValue} onKeyDown={this.handleKeyDown} />
 					<Button variant="primary" className="add-menu" onClick={this.handleSubmit}>+</Button>
 				</Form>
 			</div>

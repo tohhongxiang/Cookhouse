@@ -7,6 +7,7 @@ import uuid from "uuid"
 class Menu extends React.Component{
 	constructor(props){
 		super(props);
+		this.textRef = React.createRef();
 		this.state = {
 			food: ""
 		};
@@ -19,7 +20,15 @@ class Menu extends React.Component{
 	};
 
 	handleSubmit = (e) => { // passes the value of the text up all the way to main component, and resets state
-		this.props.addFood(this.state.food, this.props.menuType);
+		if (this.state.food.replace(/\s/g, '').length > 0) {
+			this.props.addFood(this.state.food, this.props.menuType);
+			this.textRef.current.placeholder = "Add Food";
+			this.textRef.current.classList.remove("invalid");
+		} else {
+			this.textRef.current.placeholder = "No empty values";
+			this.textRef.current.classList.add("invalid");
+		}
+		
 		this.setState({
 			food: ""
 		});
@@ -60,7 +69,7 @@ class Menu extends React.Component{
 					</div>
 						{foodList}
 						<Form className="add-food form-group">
-							<Form.Control type="text" onChange={this.handleChange} value={this.state.food} onKeyDown={this.handleKeyDown} placeholder="Add Food"/>
+							<Form.Control type="text" ref={this.textRef} onChange={this.handleChange} value={this.state.food} onKeyDown={this.handleKeyDown} placeholder="Add Food"/>
 							<Button type="submit" variant="outline-secondary" className="add-food" onClick={this.handleSubmit}><strong> + </strong></Button>
 						</Form>
 				</div>

@@ -3,7 +3,7 @@ import './App.css';
 import Footer from "./components/Footer"
 import About from "./components/About"
 import Help from "./components/Help"
-import DisplayedMenu from "./components/DisplayedMenu"
+import DisplayedMeal from "./components/DisplayedMeal"
 import { Route, HashRouter, Link } from "react-router-dom"
 import Navbar from "react-bootstrap/Navbar"
 import Nav from "react-bootstrap/Nav"
@@ -33,7 +33,7 @@ class App extends React.Component {
           </Navbar.Collapse>
         </Navbar>
 
-        <Route path="/" exact render={(props) => <DisplayedMenu/>} />
+        <Route path="/" exact render={(props) => <DisplayedMeal/>} />
         <Route path="/about" component={About} />
         <Route path="/help" component={Help} />
         <Footer />
