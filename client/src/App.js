@@ -18,17 +18,22 @@ class App extends React.Component {
     }
   }
 
+  handleClick = (e) => {
+    document.querySelectorAll(".nav-link").forEach(item => item.classList.remove("active"));
+    document.querySelector("#" + e.target.getAttribute("data-set-active")).classList.add("active");
+  }
+
   render () {
     return (
       <HashRouter basename="/">
         <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
-          <Navbar.Brand className="brand"><Link to="/">Cookhouse Menu</Link></Navbar.Brand>
+          <Navbar.Brand className="brand"><Link to="/" onClick={this.handleClick} data-set-active="home">Cookhouse Menu</Link></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto link-list">
-              <Link to="/">Home</Link>
-              <Link to="/help">Help</Link>
-              <Link to="/about">About</Link>
+              <Link to="/" onClick={this.handleClick} id="home" className="nav-link active" data-set-active="home">Home</Link>
+              <Link to="/help" onClick={this.handleClick} id="help" className="nav-link" data-set-active="help">Help</Link>
+              <Link to="/about" onClick={this.handleClick} id="about" className="nav-link" data-set-active="about">About</Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
