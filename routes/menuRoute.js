@@ -1,67 +1,83 @@
 const express = require('express');
 const router = express.Router();
-
+const verify = require('./verifyToken'); // middleware which we will include for private routes
 const DayMenus = require('../models/DayMenusModel.js');
 
-// GET ALL 
+// /api/menus/all
+// gets all menus 
+// PUBLIC
 router.get('/all', (req, res) => {
     DayMenus.find()
     .sort({date: 1})
     .then( dayMenus => {
-        res.json(dayMenus);
+        return res.json(dayMenus);
     })
 });
 
-// GET ONE BY ID
+// /api/menus/:id
+// gets 1 menu by id
+// PUBLIC
 router.get('/:id', (req, res) => {
     const id = req.params.id;
     DayMenus.find(id, (err, daymenu) => {
+        if (err) {
+            return res.status(400).send(err);
+        }
         if (!daymenu) {
-            res.status(404).json({
+            return res.status(404).json({
                 msg:`Failed to find data with id ${id}`
             });
         } else {
-            res.json(daymenu);
+            return res.json(daymenu);
         }
     });
 });
 
+// /api/menus/
 // GET ALL WITHIN STARTDATE AND ENDDATE (INCLUSIVE)
+// PUBLIC
 router.get('/', (req, res) => {
     const {startDate, endDate} = req.query;
     DayMenus.find({
         date: {$gte: startDate, $lte: endDate}
     }).sort({date: 1}) //sort by ascending dates
     .then(daymenus => {
-        res.json(daymenus);
+        return res.json(daymenus);
     }).catch(err => {
-        res.json({
-            msg: "Failed",
+        return res.json({
+            msg: "failed",
             err
         });
     });
 })
 
+// /api/menus
 // Add new menu
-router.post('/', (req, res) => {
+// PRIVATE
+router.post('/', verify, (req, res) => {
     const newMenu = new DayMenus({
         ...req.body
     });
 
-    console.log(newMenu);
     newMenu.save()
     .then(() => res.json({
         msg: "Successfully added menu entry",
         item: newMenu
-    })).catch(err => console.log(err));
+    })).catch(err => {
+        return res.json({
+            msg: 'failed',
+            err
+        })
+    });
 });
 
+// /api/menus/:date
 // Delete menu by date
-router.delete('/:date', (req, res) => {
+// PRIVATE
+router.delete('/:date', verify, (req, res) => {
     const date = req.params.date;
     DayMenus.deleteOne({date}, (err) => {
         if (err) {
-            console.log(err);
             res.json({
                 msg: "Failed",
                 err
@@ -75,13 +91,14 @@ router.delete('/:date', (req, res) => {
     })
 });
 
-//modify menu
-router.post('/:date', (req, res) => {
+// /api/menu/:date
+// Modify menu by date
+// PRIVATE
+router.post('/:date', verify, (req, res) => {
     const date = req.params.date;
     const updatedMenu = new DayMenus({
         ...req.body
     });
-    console.log(updatedMenu);
     DayMenus.updateOne({date}, updatedMenu, (err, daymenu) => {
         if (err) {
             res.json({

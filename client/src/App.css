@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.hidden {
+	display: none;
+}
+
 .jumbotron {
 	margin: 0;
 }
@@ -12,14 +16,17 @@
 	text-align: center;
 }
 
-.form-group {
+.home-form-group {
 	display: grid;
 	grid-template-columns: 1fr auto;
 	grid-gap: 10px;
 	grid-column: 1/-1;
+	margin-top: 0;
+	margin-bottom: 20px;
+	justify-content: center;
 }
 
-.form-group > * {
+.home-form-group > * {
 	box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
 }
 
@@ -35,7 +42,6 @@
 
 nav {
 	display: flex;
-	overflow: hidden;
 	justify-content: space-between;
 	align-items: center;
 	background: #232323;
@@ -45,8 +51,9 @@ nav {
 
 nav .link-list {
 	display: flex;
+	align-items: center;
 	list-style: none;
-	margin-left: auto;
+	margin-right: 20px;
 }
 
 nav a {
@@ -59,8 +66,7 @@ nav .brand {
 	font-size: 30px;
 }
 
-nav .link-list a {
-	padding: 20px;
+nav .link-list > a , nav .nav-item{
 	font-size: 20px;
 	font-weight: 300;
 }
@@ -68,6 +74,19 @@ nav .link-list a {
 nav a:hover {
 	color: #D0D0D0;
 	text-decoration: none;
+}
+
+nav .dropdown-menu {
+	padding: 0 !important;
+}
+
+nav .dropdown-menu .dropdown-item {
+	color: #121212 !important;
+	padding: 20px;
+}
+
+nav .dropdown-menu .dropdown-divider {
+	margin: 0;
 }
 
 
@@ -136,16 +155,6 @@ nav a:hover {
 	border: 10px solid black;
 }
 
-.invalid {
-	border:2px solid rgba(243, 54, 54, 0.8);
-}
-
-.invalid:focus {
-	border:2px solid rgba(243, 54, 54, 0.8);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(243, 54, 54, 0.8);
-	outline: 0 none;
-}
-
 .dayMeal-header {
 	display: grid;
 	align-content: center;
@@ -200,7 +209,7 @@ nav a:hover {
 	display: grid;
 	grid-template-columns: 1fr auto;
 	align-items: baseline;
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 }
 
 .menu-container:not(:last-child) {
@@ -216,13 +225,22 @@ nav a:hover {
 	background-color: #FFFFFF;
 }
 
+.add-food {
+	margin: 10px;
+	margin-top: 0;
+	margin-left: 0;
+}
+
 footer {
 	background-color: #222222;
 	color: #fff;
-	padding: 10px 20px;
-	display: grid;
-	grid-template-columns: 1fr auto;
-	justify-content: space-between;
+	padding: 10px;
+}
+
+footer a {
+	margin: auto;
+	display: inline-block;
+	padding: 10px;
 }
 
 .helpItem {
@@ -242,6 +260,41 @@ footer {
 #overallMenu {
 	display: flex;
 	flex-direction: column;
+}
+
+.login-page-container, .registration-page-container {
+	text-align: center;
+	min-height: 90vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.form-jumbotron {
+	width: 500px;
+	margin: 0 auto;
+	margin-bottom: 0;
+	text-align: left;
+}
+
+.forgotPassword-page-container .button-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.register-text, .login-text {
+	margin: 20px 0;
+}
+
+.edit-user-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.edit-user-header .edit-user-button.btn-link {
+	font-size: 30px;
 }
 
 @media only screen and (max-width: 1500px) {

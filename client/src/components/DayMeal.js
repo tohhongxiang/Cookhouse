@@ -23,10 +23,10 @@ export default class DayMeal extends React.Component {
 		if (this.state.mealValue.replace(/\s/g, '').length > 0){
 			this.props.addMeal(this.state.mealValue, this.props.date);
 			this.textRef.current.placeholder = "Add Meal";
-			this.textRef.current.classList.remove("invalid");
+			this.textRef.current.classList.remove("is-invalid");
 			} else {
 				this.textRef.current.placeholder = "No empty values";
-				this.textRef.current.classList.add("invalid");
+				this.textRef.current.classList.add("is-invalid");
 			}
 			// this.props.addMeal(this.state.mealValue, this.props.date);
 		this.setState({
@@ -90,7 +90,7 @@ export default class DayMeal extends React.Component {
 				<div className="dayMeal-header text-center">
 					<h2>{displayDate(this.props.date)}</h2>
 					<h2>{displayDay(this.props.date)}</h2>
-					<Form className="add-meal form-group">
+					<Form className="add-meal home-form-group">
 						<Form.Control 
 						key={this.props.date}
 						ref={this.textRef}

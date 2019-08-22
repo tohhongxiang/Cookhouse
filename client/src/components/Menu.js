@@ -23,10 +23,10 @@ class Menu extends React.Component{
 		if (this.state.food.replace(/\s/g, '').length > 0) {
 			this.props.addFood(this.state.food, this.props.menuType);
 			this.textRef.current.placeholder = "Add Food";
-			this.textRef.current.classList.remove("invalid");
+			this.textRef.current.classList.remove("is-invalid");
 		} else {
 			this.textRef.current.placeholder = "No empty values";
-			this.textRef.current.classList.add("invalid");
+			this.textRef.current.classList.add("is-invalid");
 		}
 		
 		this.setState({
@@ -51,12 +51,12 @@ class Menu extends React.Component{
 
 	render() {
 		let foodList;
-		if (this.props.foodList) {
+		if (this.props.foodList.length > 0) {
 			foodList = this.props.foodList.map(food => 
 				<FoodItem food={food} key={uuid.v4()} deleteFood={this.deleteFood}/> // For each food item on the menu, render it
 			);
 		} else {
-			foodList = [];
+			foodList = <p><i>No food items set</i></p>;
 		}
 		
 		let menuType = this.props.menuType;
@@ -68,7 +68,7 @@ class Menu extends React.Component{
 						<Button variant="link" className="delete-menu" onClick={this.deleteMenu}><strong><span role="button"> &#x00D7; </span></strong></Button>
 					</div>
 						{foodList}
-						<Form className="add-food form-group">
+						<Form className="add-food home-form-group">
 							<Form.Control type="text" ref={this.textRef} onChange={this.handleChange} value={this.state.food} onKeyDown={this.handleKeyDown} placeholder="Add Food"/>
 							<Button type="submit" variant="outline-secondary" className="add-food" onClick={this.handleSubmit}><strong> + </strong></Button>
 						</Form>

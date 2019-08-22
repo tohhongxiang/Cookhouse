@@ -22,10 +22,10 @@ export default class Meal extends React.Component {
 		if (this.state.menuValue.replace(/\s/g, '').length > 0) {
 			this.props.addMenu(this.state.menuValue, this.props.mealType);
 			this.textRef.current.placeholder = "Add Menu";
-			this.textRef.current.classList.remove("invalid");
+			this.textRef.current.classList.remove("is-invalid");
 		} else {
 			this.textRef.current.placeholder = "No empty values";
-			this.textRef.current.classList.add("invalid");
+			this.textRef.current.classList.add("is-invalid");
 		}
 		
 		this.setState({
@@ -72,7 +72,7 @@ export default class Meal extends React.Component {
 					<Button variant="link" size="lg" onClick={this.deleteMeal} className="deleteMeal"><span role="img" aria-label="Close">&#x274C;</span></Button>
 				</div>
 				{displayedMenuList}
-				<Form className="add-menu-container form-group">
+				<Form className="add-menu-container home-form-group">
 					<Form.Control 
 					type="text" 
 					list="menu-choices"

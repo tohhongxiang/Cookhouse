@@ -4,15 +4,17 @@ import Header from "./Header";
 import {getCurrentWeek} from "../utils/helpers";
 import DayMeal from './DayMeal';
 import axios from "axios";
+import Alert from "react-bootstrap/Alert";
 
 class DisplayedMeal extends React.Component {
 	constructor(props) {
-		super(props);
+    super(props);
 		let {startDate, endDate} = getCurrentWeek();
 		this.state = {
-		startDate: startDate,
-    endDate: endDate,
-		overallMenu: []
+      errors:null,
+      startDate: startDate,
+      endDate: endDate,
+      overallMenu: []
     }
   }
   
@@ -28,7 +30,7 @@ class DisplayedMeal extends React.Component {
     // because sometimes only the object within the object changes
     // and deep copying the object hurts performance
   
-    axios.get("/api", {
+    axios.get("/api/menus", {
       params: {
         startDate: this.state.startDate.toISOString(),
         endDate: this.state.endDate.toISOString()
@@ -43,10 +45,11 @@ class DisplayedMeal extends React.Component {
         date.date = new Date(date.date);
       })
       this.setState({
-        overallMenu: data
+        overallMenu: data,
+        errors: null
       });
     }).catch(err => {
-      console.log("ERROR: ", err);
+      this.handleErrors(err);
     });
   }
 
@@ -72,10 +75,29 @@ class DisplayedMeal extends React.Component {
         this.fetchData();
       });
   }
+
+  handleErrors = (err) => {
+    const statusCode = err.response.status;
+    let errorMessage;
+
+    if (statusCode === 400 || statusCode === 401) {
+      errorMessage = `Please login to continue. Status code: ${statusCode}`;
+    } else {
+      errorMessage = err.response.data.error;
+    }
+
+    this.setState({
+      errors: errorMessage
+    });
+  }
   
   addFood = (food, menuType, mealType, date) => {
+    const headers = {
+      "auth-token": localStorage.getItem('jwt-token')
+    }
+
     if (food) { // only add if not empty
-      let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
+      let currentUpdatedMenu = {...this.state.overallMenu.find(item => item.date === date)};
       
       currentUpdatedMenu.menu.forEach(meal => {
         if (meal.mealType === mealType) {
@@ -87,18 +109,26 @@ class DisplayedMeal extends React.Component {
         };
         return meal;
       });
-        
+
       const isoDate_ = new Date(date).toISOString();
-      axios.post('/api/' + isoDate_, currentUpdatedMenu)
+      axios.post('/api/menus/' + isoDate_, currentUpdatedMenu, {headers})
       .then(res => {
         console.log(res.data);
+        this.setState({
+          errors: null
+        });
         this.fetchData();
-      });
+      })
+      .catch(err => this.handleErrors(err));
     }
   };
 
 	deleteFood = (food, menuType, mealType, date) => {
-    let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
+    const headers = {
+      "auth-token": localStorage.getItem('jwt-token')
+    }
+
+    let currentUpdatedMenu = {...this.state.overallMenu.find(item => item.date === date)};
     currentUpdatedMenu.menu.forEach(meal => {
       if (meal.mealType === mealType) {
         meal.menuList.forEach( subMenu => {
@@ -113,16 +143,23 @@ class DisplayedMeal extends React.Component {
     });
 
     const isoDate_ = new Date(date).toISOString();
-    axios.post('/api/' + isoDate_, currentUpdatedMenu)
+    axios.post('/api/menus/' + isoDate_, currentUpdatedMenu, {headers})
     .then(res => {
       console.log(res.data);
+      this.setState({
+        errors: null
+      });
       this.fetchData();
-    });
+    }).catch(err => this.handleErrors(err));
   };
 
   addMenu = (menuToAdd, mealType, date) => {
+    const headers = {
+      "auth-token": localStorage.getItem('jwt-token')
+    }
+
     if (menuToAdd.length > 0) { // only add if not empty
-      let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
+      let currentUpdatedMenu = {...this.state.overallMenu.find(item => item.date === date)};
       currentUpdatedMenu.menu.forEach(menu => {
         if (menu.mealType === mealType) {
           menu.menuList.push({
@@ -134,16 +171,23 @@ class DisplayedMeal extends React.Component {
       });  
   
       const isoDate_ = new Date(date).toISOString();
-      axios.post('/api/' + isoDate_, currentUpdatedMenu)
+      axios.post('/api/menus/' + isoDate_, currentUpdatedMenu, {headers})
       .then(res => {
         console.log(res.data);
+        this.setState({
+          errors: null
+        });
         this.fetchData();
-      });
+      }).catch(err => this.handleErrors(err));
     }
     }
 
   deleteMenu = (menuToDelete, mealType, date) => {
-    let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
+    const headers = {
+      "auth-token": localStorage.getItem('jwt-token')
+    }
+
+    let currentUpdatedMenu = {...this.state.overallMenu.find(item => item.date === date)};
     currentUpdatedMenu.menu.forEach(menu => {
       if (menu.mealType === mealType) {
         menu.menuList = menu.menuList.filter(menu => menu.subMenuType !== menuToDelete);
@@ -152,29 +196,39 @@ class DisplayedMeal extends React.Component {
     });  
 
     const isoDate_ = new Date(date).toISOString();
-    axios.post('/api/' + isoDate_, currentUpdatedMenu)
+    axios.post('/api/menus/' + isoDate_, currentUpdatedMenu, {headers})
     .then(res => {
       console.log(res.data);
+      this.setState({
+        errors: null
+      });
       this.fetchData();
-    });
+    }).catch(err => this.handleErrors(err));
   
   }
 
   addMeal = (meal, date) => {
+    const headers = {
+      "auth-token": localStorage.getItem('jwt-token')
+    }
+
     // If the entire day doesnt exist, we need to add an entire entry
     // If day exists, we need to modify the specific entry
-    let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
-    if (currentUpdatedMenu) {
+    let currentUpdatedMenu = {...this.state.overallMenu.find(item => item.date === date)};
+    if (currentUpdatedMenu.hasOwnProperty('menu')) {
       currentUpdatedMenu.menu.push({
         mealType: meal,
         menuList: []
       });
       const isoDate_ = new Date(date).toISOString();
-      axios.post('/api/' + isoDate_, currentUpdatedMenu)
+      axios.post('/api/menus/' + isoDate_, currentUpdatedMenu, {headers})
       .then(res => {
         console.log(res.data);
+        this.setState({
+          errors: null
+        });
         this.fetchData();
-      });
+      }).catch(err => this.handleErrors(err));
     } else {
       currentUpdatedMenu = {
         date,
@@ -185,31 +239,41 @@ class DisplayedMeal extends React.Component {
           }
         ]
       };
-      axios.post('/api/', currentUpdatedMenu)
+      axios.post('/api/menus/', currentUpdatedMenu, {headers})
       .then(res => {
         console.log(res.data);
+        this.setState({
+          errors: null
+        });
         this.fetchData();
-      });
+      }).catch(err => this.handleErrors(err));
     }
   }
 
   deleteMeal = (mealType, date) => {
-    let currentUpdatedMenu = this.state.overallMenu.find(item => item.date === date);
+    const headers = {
+      "auth-token": localStorage.getItem('jwt-token')
+    }
+
+    let currentUpdatedMenu = {...this.state.overallMenu.find(item => item.date === date)};
     currentUpdatedMenu.menu = currentUpdatedMenu.menu.filter(menu => menu.mealType !== mealType);
 
     const isoDate_ = new Date(date).toISOString();
     if (currentUpdatedMenu.menu.length > 0) {
-      axios.post('/api/' + isoDate_, currentUpdatedMenu)
+      axios.post('/api/menus/' + isoDate_, currentUpdatedMenu, {headers})
       .then(res => {
         console.log(res.data);
+        this.setState({
+          errors: null
+        });
         this.fetchData();
-      });
+      }).catch(err => this.handleErrors(err));
     } else {
-      axios.delete('/api/' + isoDate_)
+      axios.delete('/api/menus/' + isoDate_, {headers})
       .then(res => {
         console.log(res.data);
         this.fetchData();
-      });
+      }).catch(err => this.handleErrors(err));
     }
       
   }
@@ -256,6 +320,11 @@ class DisplayedMeal extends React.Component {
     	<div>
     	<Header startDate={this.state.startDate} endDate={this.state.endDate} changeStartDate={this.changeStartDate} changeEndDate={this.changeEndDate}/>
         <Jumbotron className="weekMenu-container">
+          {this.state.errors ? (
+            <Alert variant="danger"> {this.state.errors} </Alert>
+          ) : (
+            null
+          )}
           {displayedMeals}
         </Jumbotron>
         </div>
