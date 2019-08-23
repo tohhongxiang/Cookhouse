@@ -55,6 +55,7 @@ router.get('/', (req, res) => {
 // Add new menu
 // PRIVATE
 router.post('/', verify, (req, res) => {
+    console.log(req.user);
     const newMenu = new DayMenus({
         ...req.body
     });

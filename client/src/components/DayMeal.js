@@ -90,7 +90,7 @@ export default class DayMeal extends React.Component {
 				<div className="dayMeal-header text-center">
 					<h2>{displayDate(this.props.date)}</h2>
 					<h2>{displayDay(this.props.date)}</h2>
-					<Form className="add-meal home-form-group">
+					<Form className="add-meal home-form-group" onSubmit={this.handleSubmit}>
 						<Form.Control 
 						key={this.props.date}
 						ref={this.textRef}
@@ -109,7 +109,7 @@ export default class DayMeal extends React.Component {
 							<option value="Lunch" />
 							<option value="Dinner" />
 						</datalist>
-						<Button variant="primary" onClick={this.handleSubmit}>+</Button>
+						<Button type="submit" variant="primary">+</Button>
 					</Form>
 				</div>
 				<div className="meals-container">

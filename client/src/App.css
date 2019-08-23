@@ -182,12 +182,14 @@ nav .dropdown-menu .dropdown-divider {
 
 .meal-container h3 {
 	margin: 0;
+	min-width: 200px;
 }
 
 .meal-container-header {
 	display: grid;
 	grid-template-columns: 1fr auto;
 	align-items: center;
+	padding-bottom: 20px;
 }
 
 .menu-header {
@@ -195,6 +197,7 @@ nav .dropdown-menu .dropdown-divider {
 	display: grid;
 	grid-template-columns: 1fr auto;
 	align-items: center;
+	padding-bottom: 10px;
 }
 
 .menu-header .delete-menu {

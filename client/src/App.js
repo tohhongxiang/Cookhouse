@@ -39,6 +39,9 @@ class App extends React.Component {
       this.setState({
         username
       });
+    }).catch(err => {
+      console.log(err.response.data);
+      localStorage.removeItem('jwt-token');
     });
   }
 
@@ -146,7 +149,7 @@ class App extends React.Component {
         </Navbar>
 
         <Switch>
-          <Route path="/" exact component={DisplayedMeal} />
+          <Route path="/" exact render={() => <DisplayedMeal deactivated={!this.state.username ? true : false} />} />
           <Route path="/about" component={About} />
           <Route path="/help" component={Help} />
           <Route path="/register" component={Register} />

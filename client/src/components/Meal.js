@@ -34,12 +34,6 @@ export default class Meal extends React.Component {
 		e.preventDefault();
 	}
 
-	handleKeyDown = (e) => {
-		if (e.keyCode === 13) { // IF ENTER IS PRESSED, SUBMIT
-			this.handleSubmit(e);
-		}
-	}
-
 	deleteFood = (food, menuType) => {
 		this.props.deleteFood(food, menuType, this.props.mealType);
 	}
@@ -60,7 +54,13 @@ export default class Meal extends React.Component {
 		let displayedMenuList;
 		if (this.props.menuList.length > 0) {
 			displayedMenuList = this.props.menuList.map(item => 
-				<Menu key={item._id} menuType={item.subMenuType} foodList={item.menuList} deleteFood={this.deleteFood} addFood={this.addFood} deleteMenu={this.deleteMenu}/>);
+				<Menu 
+				key={item._id}
+				menuType={item.subMenuType} 
+				foodList={item.menuList} 
+				deleteFood={this.deleteFood} 
+				addFood={this.addFood} 
+				deleteMenu={this.deleteMenu} />);
 		} else {
 			displayedMenuList = <h5><i> No menu set </i></h5>;
 		}
@@ -72,7 +72,7 @@ export default class Meal extends React.Component {
 					<Button variant="link" size="lg" onClick={this.deleteMeal} className="deleteMeal"><span role="img" aria-label="Close">&#x274C;</span></Button>
 				</div>
 				{displayedMenuList}
-				<Form className="add-menu-container home-form-group">
+				<Form className="add-menu-container home-form-group" onSubmit={this.handleSubmit}>
 					<Form.Control 
 					type="text" 
 					list="menu-choices"
@@ -87,7 +87,7 @@ export default class Meal extends React.Component {
 							<option value="Non-Muslim" />
 							<option value="Vegetarian" />
 						</datalist>
-					<Button variant="primary" className="add-menu" onClick={this.handleSubmit}>+</Button>
+					<Button variant="primary" type="submit" className="add-menu">+</Button>
 				</Form>
 			</div>
 		)

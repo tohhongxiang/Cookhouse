@@ -92,6 +92,10 @@ class DisplayedMeal extends React.Component {
   }
   
   addFood = (food, menuType, mealType, date) => {
+    if (this.props.deactivated) {
+      return this.handleErrors({response: {status: 400, errorMessage: "Please log in to continue"}})
+    } 
+
     const headers = {
       "auth-token": localStorage.getItem('jwt-token')
     }
@@ -121,9 +125,15 @@ class DisplayedMeal extends React.Component {
       })
       .catch(err => this.handleErrors(err));
     }
+  
+    
   };
 
 	deleteFood = (food, menuType, mealType, date) => {
+    if (this.props.deactivated) {
+      return this.handleErrors({response: {status: 400, errorMessage: "Please log in to continue"}})
+    } 
+
     const headers = {
       "auth-token": localStorage.getItem('jwt-token')
     }
@@ -151,9 +161,16 @@ class DisplayedMeal extends React.Component {
       });
       this.fetchData();
     }).catch(err => this.handleErrors(err));
+    
+    
   };
 
   addMenu = (menuToAdd, mealType, date) => {
+    console.log(this.props.deactivated);
+    if (this.props.deactivated) {
+      return this.handleErrors({response: {status: 400, errorMessage: "Please log in to continue"}})
+    } 
+
     const headers = {
       "auth-token": localStorage.getItem('jwt-token')
     }
@@ -180,9 +197,14 @@ class DisplayedMeal extends React.Component {
         this.fetchData();
       }).catch(err => this.handleErrors(err));
     }
-    }
+    
+  }
 
   deleteMenu = (menuToDelete, mealType, date) => {
+    if (this.props.deactivated) {
+      return this.handleErrors({response: {status: 400, errorMessage: "Please log in to continue"}})
+    }
+
     const headers = {
       "auth-token": localStorage.getItem('jwt-token')
     }
@@ -208,6 +230,10 @@ class DisplayedMeal extends React.Component {
   }
 
   addMeal = (meal, date) => {
+    if (this.props.deactivated) {
+      return this.handleErrors({response: {status: 400, errorMessage: "Please log in to continue"}})
+    }
+
     const headers = {
       "auth-token": localStorage.getItem('jwt-token')
     }
@@ -251,6 +277,10 @@ class DisplayedMeal extends React.Component {
   }
 
   deleteMeal = (mealType, date) => {
+    if (this.props.deactivated) {
+      return this.handleErrors({response: {status: 400, errorMessage: "Please log in to continue"}})
+    }
+
     const headers = {
       "auth-token": localStorage.getItem('jwt-token')
     }
