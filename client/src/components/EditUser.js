@@ -6,11 +6,13 @@ import Container from 'react-bootstrap/Container';
 import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { FaEdit, FaWindowClose } from 'react-icons/fa';
 
 class EditUser extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            showFields: false,
             username: "",
             email: "",
             oldPassword: "",
@@ -70,19 +72,6 @@ class EditUser extends React.Component {
 
     enableFields = (e) => {
         const button = e.target;
-        if (button.textContent === "Edit details") {
-            button.textContent = '\u2715';
-        } else {
-            button.textContent = "Edit details";
-        }
-
-        if (button.classList.contains('btn-secondary')) {
-            button.classList.remove('btn-secondary');
-            button.classList.add('btn-link');
-        } else {
-            button.classList.add('btn-secondary');
-            button.classList.remove('btn-link');
-        }
 
         const toggleFields = document.querySelectorAll('.toggle-disable');
         toggleFields.forEach(item => {
@@ -95,6 +84,10 @@ class EditUser extends React.Component {
         const hiddenFields = document.querySelectorAll('.hidden-fields');
         hiddenFields.forEach(field => {
             field.classList.toggle('hidden');
+        });
+
+        this.setState((prevState) => {
+            return {showFields: !prevState.showFields}
         })
         
     }
@@ -110,8 +103,8 @@ class EditUser extends React.Component {
             <Container className="edituser-page-container">
                 <Jumbotron className="edituser-form-container form-jumbotron">
                     <div className="edit-user-header">
-                        <h1>User Information</h1>
-                        <Button variant='secondary' className="edit-user-button" onClick={this.enableFields}>Edit details</Button>
+                        <h2>User Information</h2>
+                        <Button variant='link' style={{color:"#444444"}} className="edit-user-button" onClick={this.enableFields}>{this.state.showFields ? <FaWindowClose /> : <FaEdit />}</Button>
                     </div>
                     
                     <Form autoComplete="on">
