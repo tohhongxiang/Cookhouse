@@ -15,6 +15,3 @@ Features:
 3. Basic CRUD (Create, Read, Update, and Delete) operations
 4. Help page to teach people how to use the application
 
-Features to add:
-1. Login
-2. Documentation
